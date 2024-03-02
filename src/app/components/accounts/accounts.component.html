@@ -1,0 +1,58 @@
+<div id="sdwds-grid-layout">
+  <nav id="sdwds-grid-nav">
+      <!-- <app-sidebar></app-sidebar> -->
+  </nav>
+  <div id="sdwds-grid-content">
+      <div class="container my-5">
+          <div class="" card mb-3>
+              <div class="card-body">
+                  <div class="input-group mb-3">
+                      <span (click)="search()" class="input-group-text">
+                          <i class="icons8-f-search"></i>
+                      </span>
+                      <input type="text" class="form-control" placeholder="Search user" [(ngModel)]="searchText"
+                          (keyup)="search()">
+                      <span (click)="clearSearch()" class="input-group-text">
+                          <i class="icons8-f-close"></i>
+                      </span>
+                  </div>
+              </div>
+          </div>
+          <div class="card-container mb-5">
+              <div class="row row-cols-3 g-4">
+                @for (user of filteredAccountsList; track user.username){
+                  <div class="col">
+                      <div class="card h-100">
+
+                          <div class="card-body">
+                              <span class="avatar w-96 me-3">
+                                  <!-- <img [src]="user.avatar" alt="{{user.firstName}}"> -->
+                              </span>
+                              <h5 class="card-title">
+                                  {{user.firstName}} {{user.lastName}}
+                                  <!-- <app-modal [item]="user"></app-modal> -->
+                              </h5>
+                              <p class="card-text">username: {{user.username}}</p>
+                              <p class="card-text">email: {{user.email}}</p>
+                              <ng-template #btnDelete>
+                                  <p>Are you sure you want to <span class="text-danger">delete</span> this user?</p>
+                              </ng-template>
+                              <button class="btn btn-warning me-2" [routerLink]="['/user/edit/',user.accountID]">
+                                  <i class="icons8-f-edit"></i>
+                                  Edit
+                              </button>
+                              <button (click)="deleteUser(user.accountID)" [ngbTooltip]="btnDelete"
+                                  class="btn btn-danger text-dark">
+                                  <i class=" icons8-f-trash"></i>
+                                  Delete
+                              </button>
+                          </div>
+                      </div>
+                  </div>
+                }
+              </div>
+          </div>
+
+      </div>
+  </div>
+</div>

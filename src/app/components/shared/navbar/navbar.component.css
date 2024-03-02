@@ -1,0 +1,5 @@
+
+.tab-menu-container {
+  display: flex;
+  justify-content: center; /* Wyśrodkowanie elementów na osi poziomej */
+}

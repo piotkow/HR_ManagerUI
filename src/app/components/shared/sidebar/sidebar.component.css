@@ -1,0 +1,9 @@
+::ng-deep .prime-menu-override {
+      background-color: var(--gray-800);
+      background-image:none;
+      border:none;
+      color:white;
+      min-height: 94.35vh;
+      border-radius: 0;
+}
+

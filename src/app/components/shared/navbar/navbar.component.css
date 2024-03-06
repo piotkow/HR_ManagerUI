@@ -1,5 +1,10 @@
+@import "../../../../../node_modules/bootstrap/dist/css/bootstrap.min.css";
+.navbar{
+background-color: var(--highlight-bg);
+color: var(--highlight-text-color);
+border-radius: 0px;
+}
 
-.tab-menu-container {
-  display: flex;
-  justify-content: center; /* Wyśrodkowanie elementów na osi poziomej */
+img {
+  width: 5%;
 }

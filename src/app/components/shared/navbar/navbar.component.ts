@@ -1,11 +1,14 @@
 import { Component } from '@angular/core';
 import { MenuItem } from 'primeng/api';
 import { TabMenuModule } from 'primeng/tabmenu';
+import { AvatarModule } from 'primeng/avatar';
+import { OverlayPanelModule } from 'primeng/overlaypanel';
+import { ButtonModule } from 'primeng/button';
 
 @Component({
   selector: 'app-navbar',
   standalone: true,
-  imports: [TabMenuModule],
+  imports: [TabMenuModule, AvatarModule, OverlayPanelModule,ButtonModule],
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.css'
 })
@@ -18,9 +21,8 @@ export class NavbarComponent {
       this.items = [
           { label: 'Home', icon: 'pi pi-fw pi-home' },
           { label: 'Calendar', icon: 'pi pi-fw pi-calendar' },
-          { label: 'Edit', icon: 'pi pi-fw pi-pencil' },
-          { label: 'Documentation', icon: 'pi pi-fw pi-file' },
-          { label: 'Settings', icon: 'pi pi-fw pi-cog' }
+          { label: 'Profile', icon: 'pi pi-fw pi-pencil' }
+
       ];
 
       this.activeItem = this.items[0];

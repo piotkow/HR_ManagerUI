@@ -1,0 +1,15 @@
+export * from './absence.api';
+import { AbsenceApi } from './absence.api';
+export * from './account.api';
+import { AccountApi } from './account.api';
+export * from './document.api';
+import { DocumentApi } from './document.api';
+export * from './employee.api';
+import { EmployeeApi } from './employee.api';
+export * from './position.api';
+import { PositionApi } from './position.api';
+export * from './report.api';
+import { ReportApi } from './report.api';
+export * from './team.api';
+import { TeamApi } from './team.api';
+export const APIS = [AbsenceApi, AccountApi, DocumentApi, EmployeeApi, PositionApi, ReportApi, TeamApi];

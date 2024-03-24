@@ -1,0 +1,8 @@
+.container {
+  padding: 3vh;
+}
+
+::ng-deep tr.employee-row:hover{
+  color: rgba(255, 255, 255, 0.87);
+  background: rgba(255, 255, 255, 0.03);
+}

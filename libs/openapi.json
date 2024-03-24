@@ -1618,6 +1618,9 @@
           "account": {
             "$ref": "#/components/schemas/Account"
           },
+          "photo": {
+            "$ref": "#/components/schemas/Photo"
+          },
           "documents": {
             "type": "array",
             "items": {
@@ -1652,6 +1655,10 @@
       "EmployeePositionTeamResponse": {
         "type": "object",
         "properties": {
+          "employeeID": {
+            "type": "integer",
+            "format": "int32"
+          },
           "firstName": {
             "type": "string",
             "nullable": true
@@ -1703,6 +1710,13 @@
           "teamDescription": {
             "type": "string",
             "nullable": true
+          },
+          "department": {
+            "type": "string",
+            "nullable": true
+          },
+          "photo": {
+            "$ref": "#/components/schemas/Photo"
           }
         },
         "additionalProperties": false
@@ -1753,6 +1767,31 @@
           "teamID": {
             "type": "integer",
             "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "Photo": {
+        "type": "object",
+        "properties": {
+          "photoID": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "filename": {
+            "type": "string",
+            "nullable": true
+          },
+          "uri": {
+            "type": "string",
+            "nullable": true
+          },
+          "employeeID": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "employee": {
+            "$ref": "#/components/schemas/Employee"
           }
         },
         "additionalProperties": false
@@ -1945,6 +1984,7 @@
       },
       "Team": {
         "required": [
+          "department",
           "teamName"
         ],
         "type": "object",
@@ -1955,6 +1995,10 @@
           },
           "teamName": {
             "maxLength": 50,
+            "minLength": 1,
+            "type": "string"
+          },
+          "department": {
             "minLength": 1,
             "type": "string"
           },
@@ -1981,6 +2025,10 @@
             "nullable": true
           },
           "teamDescription": {
+            "type": "string",
+            "nullable": true
+          },
+          "department": {
             "type": "string",
             "nullable": true
           }

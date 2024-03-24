@@ -12,11 +12,11 @@
 import { Employee } from './employee';
 
 
-export interface Team { 
-    teamID?: number;
-    teamName: string;
-    department: string;
-    teamDescription?: string | null;
-    employees?: Array<Employee> | null;
+export interface Photo { 
+    photoID?: number;
+    filename?: string | null;
+    uri?: string | null;
+    employeeID?: number;
+    employee?: Employee;
 }
 

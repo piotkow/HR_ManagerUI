@@ -27,12 +27,14 @@ export class TeamListComponent {
   ) { }
 
   ngOnInit(){
+    console.log("team list:", this.getAllTeams());
     this.getAllTeams();
   }
 
   getAllTeams(){
     this.teamApi.apiTeamGet().subscribe((result : any)=>{
       if(result){
+        console.log("team list in sub: ", result);
       this.teamList=result;
       }
     })

@@ -9,9 +9,11 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
+import { Photo } from './photo';
 
 
 export interface EmployeePositionTeamResponse { 
+    employeeID?: number;
     firstName?: string | null;
     lastName?: string | null;
     email?: string | null;
@@ -25,5 +27,7 @@ export interface EmployeePositionTeamResponse {
     positionDescription?: string | null;
     teamName?: string | null;
     teamDescription?: string | null;
+    department?: string | null;
+    photo?: Photo;
 }
 

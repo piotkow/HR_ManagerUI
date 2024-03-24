@@ -14,5 +14,6 @@
 export interface TeamRequest { 
     teamName?: string | null;
     teamDescription?: string | null;
+    department?: string | null;
 }
 

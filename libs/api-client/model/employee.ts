@@ -13,6 +13,7 @@ import { Account } from './account';
 import { Position } from './position';
 import { Report } from './report';
 import { Absence } from './absence';
+import { Photo } from './photo';
 import { Team } from './team';
 import { Document } from './document';
 
@@ -33,6 +34,7 @@ export interface Employee {
     position?: Position;
     team?: Team;
     account?: Account;
+    photo?: Photo;
     documents?: Array<Document> | null;
     absences?: Array<Absence> | null;
     authoredReports?: Array<Report> | null;

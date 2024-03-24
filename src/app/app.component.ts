@@ -5,6 +5,8 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { NavbarComponent } from "./components/shared/navbar/navbar.component";
 import { SidebarComponent } from "./components/shared/sidebar/sidebar.component";
 
+
+
 @Component({
     selector: 'app-root',
     standalone: true,

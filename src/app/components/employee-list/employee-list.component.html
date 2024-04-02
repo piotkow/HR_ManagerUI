@@ -1,5 +1,4 @@
 <div class="container flex flex-row">
-  <div class="card">
     <p-table
         #dt1
         [value]="employees"
@@ -94,7 +93,6 @@
             </tr>
         </ng-template>
     </p-table>
-  </div>
   <div *ngIf="showEmployeeCard">
     <router-outlet></router-outlet>
   </div>

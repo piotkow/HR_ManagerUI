@@ -1,13 +1,30 @@
-<div class="container">
-  <p-card header="Advanced Card" subheader="Card Subheader" [style]="{ width: '360px' }">
+<div class="container text-center">
+  <p-card header="{{employee?.firstName}} {{employee?.lastName}}" subheader="{{employee?.positionName}}" [style]="{ width: '360px' }">
     <ng-template pTemplate="header">
-        <img alt="Card" src="https://primefaces.org/cdn/primeng/images/usercard.png" />
+      <div class="avatar max-h-20">
+        <img alt="Card" [src]="employee?.photo?.uri" />
+      </div>
     </ng-template>
-    <p>
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore sed consequuntur error repudiandae numquam deserunt quisquam repellat libero asperiores earum nam nobis, culpa ratione quam perferendis esse, cupiditate neque
-        quas!
-    </p>
+      <div class="row">
+        <div class="col">
+
+          <p class="font-normal">
+            Email: {{employee?.email}}
+          </p>
+
+          <p class="font-light">
+            {{employee?.street}}, {{employee?.city}}, {{employee?.postalCode}}, {{employee?.country}}
+          </p>
+
+          <p class="font-light">
+            Phone: {{employee?.phone}}
+          </p>
+          
+      </div>
+      </div>
     <ng-template pTemplate="footer">
+      <p-button severity="info" label="Details" icon="pi pi-id-card" [rounded]="true" severity="info" [outlined]="true"></p-button>
+      <p-button icon="pi pi-trash" [rounded]="true" severity="danger" [outlined]="true" [style]="{ 'margin-left': '.5em' }"></p-button>
     </ng-template>
   </p-card>
 </div>

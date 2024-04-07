@@ -1,5 +1,46 @@
-<div class="grid nested-grid">
-   <div class="col-12">
-     <div class="text-center surface-100 w-full h-5rem ">12</div>
-   </div>
+<div class="grid nested-grid w-full">
+  <div class="flex flex-row w-full">
+    <div class="col-8 mt-4 ml-2 mr-0">
+      <p-card header="{{employee?.firstName}} {{employee?.lastName}}">
+        <div class="flex container-fluid">
+            <div class="col w-8">
+
+              <p class="font-normal">
+                Email: {{employee?.email}}
+              </p>
+
+              <p class="font-light">
+                {{employee?.street}}, {{employee?.city}}, {{employee?.postalCode}}, {{employee?.country}}
+              </p>
+
+              <p class="font-light">
+                Phone: {{employee?.phone}}
+              </p>
+          </div>
+          <div class="w2">
+            <div class="row">
+              <div class="col">
+
+                <p class="font-normal">
+                  <p-tag value="{{employee?.department}}" ></p-tag>
+                </p>
+
+                <p class="font-light">
+                  {{employee?.teamName}}
+                </p>
+
+                <p class="font-light">
+                  {{employee?.teamDescription}}
+                </p>
+
+            </div>
+            </div>
+          </div>
+        </div>
+    </p-card>
+  </div>
+    <div class="col-4 mt-4">
+      <p-image src="{{employee?.photo?.uri}}" alt="Image" width="100%" height="100%" [preview]="true"></p-image>
+    </div>
+  </div>
 </div>

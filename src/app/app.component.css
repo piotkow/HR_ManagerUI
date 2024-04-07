@@ -1,0 +1,15 @@
+::ng-deep .col-fixed {
+  padding-right: 0;
+  padding-left: 0;
+}
+
+::ng-deep .grid{
+  margin-left: 0;
+  margin-right: 0;
+}
+
+::ng-deep .col{
+  padding-left: 0;
+  padding-right: 0;
+}
+

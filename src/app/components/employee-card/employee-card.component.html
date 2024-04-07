@@ -1,5 +1,5 @@
 <div class="container text-center">
-  <p-card header="{{employee?.firstName}} {{employee?.lastName}}" subheader="{{employee?.positionName}}" [style]="{ width: '360px' }">
+  <p-card header="{{employee?.firstName}} {{employee?.lastName}}" subheader="{{employee?.positionName}}">
     <ng-template pTemplate="header">
       <div class="avatar max-h-20">
         <img alt="Card" [src]="employee?.photo?.uri" />
@@ -19,7 +19,7 @@
           <p class="font-light">
             Phone: {{employee?.phone}}
           </p>
-          
+
       </div>
       </div>
     <ng-template pTemplate="footer">

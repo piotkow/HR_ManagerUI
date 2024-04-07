@@ -1,4 +1,4 @@
-<div class="container flex flex-row">
+<div class="container flex flex-row w-full" >
     <p-table
         #dt1
         [value]="employees"
@@ -56,7 +56,7 @@
                         <p-columnFilter type="text" field="teamName" display="menu"></p-columnFilter>
                     </div>
                 </th>
-                
+
                 <th style="min-width:10rem">
                     <div class="flex align-items-center">
                         Department
@@ -112,7 +112,9 @@
         </ng-template>
     </p-table>
   <div *ngIf="showEmployeeCard">
-    <router-outlet></router-outlet>
+    <div class="col-7">
+      <router-outlet></router-outlet>
+    </div>
   </div>
 
 </div>

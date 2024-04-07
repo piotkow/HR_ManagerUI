@@ -6,6 +6,7 @@ import { TeamListComponent } from './components/team-list/team-list.component';
 import { CalendarComponent } from './components/calendar/calendar.component';
 import { EmployeeListComponent } from './components/employee-list/employee-list.component';
 import { EmployeeCardComponent } from './components/employee-card/employee-card.component';
+import { EmployeeComponent } from './components/employee/employee.component';
 
 export const routes: Routes = [
   { path: 'hr-dashboard', component: HrDashboardComponent },
@@ -13,10 +14,11 @@ export const routes: Routes = [
   { path: 'accounts', component: AccountsComponent },
   { path: '', redirectTo: '/hr-dashboard', pathMatch: 'full' },
   { path: 'team-list', component: TeamListComponent},
+  { path: 'employee/:id', component: EmployeeComponent},
   { path: 'calendar', component: CalendarComponent},
   { path: 'employee-list', component: EmployeeListComponent,
   children:[
-    {path: 'detail/:id', component: EmployeeCardComponent}
+    {path: 'detail/:id', component: EmployeeCardComponent},
   ]
   },
   { path: 'calendar', component: CalendarComponent }

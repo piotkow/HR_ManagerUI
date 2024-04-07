@@ -1,5 +1,10 @@
 <app-navbar></app-navbar>
-<div class="container">
+<div class="grid">
+  <div class="col-fixed">
   <app-sidebar class="sidebar"></app-sidebar>
-  <router-outlet></router-outlet>
+  </div>
+  <div class="col">
+    <router-outlet></router-outlet>
+  </div>
+
 </div>

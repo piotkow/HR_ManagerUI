@@ -26,6 +26,7 @@ model/employee-position-team-response.ts
 model/employee-request.ts
 model/employee.ts
 model/models.ts
+model/photo-response.ts
 model/photo.ts
 model/position-request.ts
 model/position.ts

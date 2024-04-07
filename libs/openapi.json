@@ -1716,7 +1716,7 @@
             "nullable": true
           },
           "photo": {
-            "$ref": "#/components/schemas/Photo"
+            "$ref": "#/components/schemas/PhotoResponse"
           }
         },
         "additionalProperties": false
@@ -1792,6 +1792,20 @@
           },
           "employee": {
             "$ref": "#/components/schemas/Employee"
+          }
+        },
+        "additionalProperties": false
+      },
+      "PhotoResponse": {
+        "type": "object",
+        "properties": {
+          "photoID": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "uri": {
+            "type": "string",
+            "nullable": true
           }
         },
         "additionalProperties": false

@@ -11,7 +11,8 @@ import { DropdownModule } from 'primeng/dropdown';
 import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
 import { RouterLink } from '@angular/router';
-import { RouterModule } from '@angular/router';
+import { RouterModule, Router } from '@angular/router';
+import { url } from 'inspector';
 
 
 
@@ -35,7 +36,10 @@ export class EmployeeListComponent {
     departments!: any[];
     showEmployeeCard: boolean = false;
 
-    constructor(private employeeApi : EmployeeApi) {}
+    constructor(
+      private employeeApi : EmployeeApi,
+      private router : Router
+      ) {}
 
     ngOnInit() {
       this.getAllEmployees();
@@ -71,6 +75,11 @@ export class EmployeeListComponent {
         this.departments = this.getUniqueDepartments(employees);
         this.loading = false;
     });
+    }
+
+    navigateToEmployeeDetail(employeeId: number) {
+      console.log("id w funckji: ", employeeId);
+      this.router.navigateByUrl(`employee/${{employeeId}}`);
     }
 
 }

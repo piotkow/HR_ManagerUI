@@ -11,6 +11,7 @@ export * from './employee';
 export * from './employee-position-team-response';
 export * from './employee-request';
 export * from './photo';
+export * from './photo-response';
 export * from './position';
 export * from './position-request';
 export * from './report';

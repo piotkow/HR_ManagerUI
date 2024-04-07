@@ -9,7 +9,7 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-import { Photo } from './photo';
+import { PhotoResponse } from './photo-response';
 
 
 export interface EmployeePositionTeamResponse { 
@@ -28,6 +28,6 @@ export interface EmployeePositionTeamResponse {
     teamName?: string | null;
     teamDescription?: string | null;
     department?: string | null;
-    photo?: Photo;
+    photo?: PhotoResponse;
 }
 

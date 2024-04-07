@@ -50,6 +50,13 @@
                     </div>
                 </th>
 
+                <th style="min-width:15rem">
+                    <div class="flex align-items-center">
+                      Team
+                        <p-columnFilter type="text" field="teamName" display="menu"></p-columnFilter>
+                    </div>
+                </th>
+                
                 <th style="min-width:10rem">
                     <div class="flex align-items-center">
                         Department
@@ -62,6 +69,11 @@
                                 </p-dropdown>
                             </ng-template>
                         </p-columnFilter>
+                    </div>
+                </th>
+
+                <th style="min-width:15rem">
+                    <div class="flex align-items-center">
                     </div>
                 </th>
 
@@ -82,8 +94,14 @@
                   {{ employee.dateOfEmployment | date: 'MM/dd/yyyy' }}
               </td>
               <td>
+                {{ employee.teamName}}
+              </td>
+              <td>
                   <p-tag [value]="employee.department" ></p-tag>
               </td>
+              <td>
+                <p-button [size]="'large'" icon="pi pi-arrow-right" severity="info" [rounded]="true" [text]="true" [raised]="true" [routerLink]="['/employee/',employee.employeeID]"></p-button>
+            </td>
           </tr>
 
         </ng-template>

@@ -3,6 +3,7 @@ export * from './absence-request';
 export * from './absences-employee-response';
 export * from './account';
 export * from './account-employee-response';
+export * from './account-login-request';
 export * from './account-request';
 export * from './document';
 export * from './document-employee-response';

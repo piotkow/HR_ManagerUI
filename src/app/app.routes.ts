@@ -7,10 +7,14 @@ import { CalendarComponent } from './components/calendar/calendar.component';
 import { EmployeeListComponent } from './components/employee-list/employee-list.component';
 import { EmployeeCardComponent } from './components/employee-card/employee-card.component';
 import { EmployeeComponent } from './components/employee/employee.component';
+import { LoginComponent } from './components/login/login.component';
+import { EmployeeDashboardComponent } from './components/employee-dashboard/employee-dashboard.component';
 
 export const routes: Routes = [
+  { path: 'login', component: LoginComponent},
   { path: 'hr-dashboard', component: HrDashboardComponent },
   { path: 'admin-dashboard', component: AdminDashboardComponent },
+  { path: 'employee-dashboard', component: EmployeeDashboardComponent},
   { path: 'accounts', component: AccountsComponent },
   { path: '', redirectTo: '/hr-dashboard', pathMatch: 'full' },
   { path: 'team-list', component: TeamListComponent},

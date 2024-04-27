@@ -5,6 +5,7 @@ import { AvatarModule } from 'primeng/avatar';
 import { OverlayPanelModule } from 'primeng/overlaypanel';
 import { ButtonModule } from 'primeng/button';
 import { ToggleButtonModule } from 'primeng/togglebutton'
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-navbar',
@@ -14,6 +15,9 @@ import { ToggleButtonModule } from 'primeng/togglebutton'
   styleUrl: './navbar.component.css'
 })
 export class NavbarComponent {
+  constructor(
+    private router: Router
+  ){}
   items: MenuItem[] | undefined;
 
   activeItem: MenuItem | undefined;
@@ -27,5 +31,9 @@ export class NavbarComponent {
       ];
 
       this.activeItem = this.items[0];
+  }
+
+  logout(){
+    this.router.navigateByUrl('/login');
   }
 }

@@ -6,6 +6,7 @@ api/account.api.ts
 api/api.ts
 api/document.api.ts
 api/employee.api.ts
+api/login.api.ts
 api/position.api.ts
 api/report.api.ts
 api/team.api.ts
@@ -17,6 +18,7 @@ model/absence-request.ts
 model/absence.ts
 model/absences-employee-response.ts
 model/account-employee-response.ts
+model/account-login-request.ts
 model/account-request.ts
 model/account.ts
 model/document-employee-response.ts

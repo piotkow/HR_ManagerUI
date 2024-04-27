@@ -4,11 +4,12 @@ import { CardModule } from 'primeng/card';
 import { EmployeeApi, EmployeePositionTeamResponse } from '../../../../libs/api-client';
 import { ImageModule } from 'primeng/image';
 import { TagModule } from 'primeng/tag';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-employee',
   standalone: true,
-  imports: [CardModule, ImageModule, TagModule],
+  imports: [CardModule, ImageModule, TagModule, CommonModule],
   templateUrl: './employee.component.html',
   styleUrl: './employee.component.css'
 })

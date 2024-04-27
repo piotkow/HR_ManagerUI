@@ -10,3 +10,46 @@ img {
 ::ng-deep p-image{
   margin-left: 0;
 }
+
+::ng-deep .p-card-title {
+  text-align: center;
+}
+
+.col-3{
+  padding: 0;
+}
+
+::ng-deep img {
+  border-radius: 50%;
+  max-height: 30vh;
+}
+
+::ng-deep .p-image-preview-indicator {
+  border-radius: 50%;
+}
+
+::ng-deep .p-image-preview-container{
+  border-radius: 50%;
+}
+
+::ng-deep .p-card{
+  background: rgb(2,0,36);
+  background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(65,17,95,1) 30%, rgba(57,41,115,1) 100%, rgba(0,212,255,1) 100%);
+}
+
+.name{
+  position: relative;
+}
+
+.name span {
+  position: absolute;
+  width: 10vh;
+}
+
+::ng-deep .p-card-content{
+  padding: 0;
+}
+
+::ng-deep p-card{
+  width: 100%;
+}

@@ -1,46 +1,61 @@
-<div class="grid nested-grid w-full">
-  <div class="flex flex-row w-full">
-    <div class="col-8 mt-4 ml-2 mr-0">
-      <p-card header="{{employee?.firstName}} {{employee?.lastName}}">
-        <div class="flex container-fluid">
-            <div class="col w-8">
-
-              <p class="font-normal">
-                Email: {{employee?.email}}
-              </p>
-
-              <p class="font-light">
-                {{employee?.street}}, {{employee?.city}}, {{employee?.postalCode}}, {{employee?.country}}
-              </p>
-
-              <p class="font-light">
-                Phone: {{employee?.phone}}
-              </p>
+<div class="grid flex justify-content-center flex-wrap w-full">
+    <div class="w-full mt-4 ml-2 mr-0">
+    <p-card>
+        <div class="flex container-fluid h-full">
+          <div class="col-2 border-round-lg w-2">
+            <p-image src="{{employee?.photo?.uri}}" alt="Image" width="100%" height="100%" [preview]="true" ></p-image>
           </div>
-          <div class="w2">
-            <div class="row">
-              <div class="col">
-
-                <p class="font-normal">
-                  <p-tag value="{{employee?.department}}" ></p-tag>
-                </p>
-
-                <p class="font-light">
-                  {{employee?.teamName}}
-                </p>
-
-                <p class="font-light">
-                  {{employee?.teamDescription}}
-                </p>
-
-            </div>
-            </div>
+          <div class="w-4 flex flex-column h-full">
+            <div class="align-items-center justify-content-center text-3xl font-normal">
+              <span>{{employee?.firstName}} {{employee?.lastName}}</span>
+          </div>
+          <div class="align-items-center justify-content-center text-xl font-light">
+          <span> {{employee?.positionName}} </span>
+        </div>
+          <div class="align-items-center justify-content-center text-xl font-light">
+          <span> {{employee?.teamName}} </span>
+        </div>
           </div>
         </div>
     </p-card>
   </div>
-    <div class="col-4 mt-4">
-      <p-image src="{{employee?.photo?.uri}}" alt="Image" width="100%" height="100%" [preview]="true"></p-image>
+  <div class="flex flex-row w-full ">
+    <div class="flex container-fluid w-full">
+        <div class="col w-5 text-center">
+          <div class="row">
+            <div class="col">
+
+              <p class="font-normal">
+                <i class="pi pi-map-marker"></i>
+                {{employee?.street}}, {{employee?.city}}, {{employee?.postalCode}} {{employee?.country}}
+              </p>
+
+              <p class="font-light">
+                <i class="pi pi-envelope"></i>
+                {{employee?.email}}
+              </p>
+
+              <p class="font-light">
+                <i class="pi pi-phone"></i>
+                {{employee?.phone}}
+              </p>
+          </div>
+          </div>
+      </div>
+      <div class="w-5 text-center">
+        <div class="row">
+          <div class="col">
+
+            <p class="font-normal">
+              Date of Employment:
+              <br>
+              <br>
+              {{employee?.dateOfEmployment | date }}
+            </p>
+            
+        </div>
+        </div>
+      </div>
     </div>
   </div>
 </div>

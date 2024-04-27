@@ -11,11 +11,8 @@
  */
 
 
-export interface DocumentEmployeeResponse { 
-    firstName?: string | null;
-    lastName?: string | null;
-    documentType?: string | null;
-    issueDate?: string;
-    content?: string | null;
+export interface AccountLoginRequest { 
+    username?: string | null;
+    password?: string | null;
 }
 

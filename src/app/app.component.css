@@ -8,7 +8,7 @@
   margin-right: 0;
 }
 
-::ng-deep .col{
+::ng-deep .col-10{
   padding-left: 0;
   padding-right: 0;
 }

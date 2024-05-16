@@ -1,27 +1,33 @@
 import { Component } from '@angular/core';
-import { AbstractControl, FormBuilder, FormGroup, ValidatorFn, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, ValidatorFn, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { AccountApi, AccountEmployeeResponse, Role } from '../../../../../libs/api-client';
+import { AccountApi, AccountEmployeeResponse, EmployeeApi } from '../../../../../libs/api-client';
 import Swal from 'sweetalert2';
+import { CommonModule } from '@angular/common';
+import { Role } from '../../../../../libs/api-client/model/role';
+import { InputTextModule } from 'primeng/inputtext';
+import { DropdownModule } from 'primeng/dropdown';
+import { FileUploadModule } from 'primeng/fileupload';
 
 @Component({
   selector: 'app-account-form',
   standalone: true,
-  imports: [],
+  imports: [ReactiveFormsModule, FormsModule, CommonModule, InputTextModule, DropdownModule, FileUploadModule],
   templateUrl: './account-form.component.html',
   styleUrl: './account-form.component.css'
 })
 export class AccountFormComponent {
-  userForm?: FormGroup;
+  userForm ?: FormGroup;
   userId: string | null = '';
   userDetails: AccountEmployeeResponse | any = {};
   currentRoute: string = '';
-  roles: string[] = Object.values(Role);
+  roles: Role[] = Object.values(Role);
   uploadedFileUrl: string = '';
   selectedImage: string = '';
   typedUsername: string = '';
   usernameExists: boolean = false;
   isLoading: boolean = false;
+  uploadedFile: any;
 
   maxFileSize = 9999242225555555555559999;
   fileSizeErrorMsg = 'File is too big';
@@ -39,6 +45,7 @@ export class AccountFormComponent {
     private activatedRoute: ActivatedRoute,
     private accountApi: AccountApi,
     private router: Router,
+    private employeeApi: EmployeeApi
 
     // private loadingService: LoadingService,
 
@@ -87,6 +94,7 @@ export class AccountFormComponent {
     })
   }
   }
+  
   saveUser() {
     console.log('Values from user form: ', this.userForm?.value);
     this.accountApi.apiAccountPost(this.userForm?.value).subscribe(result => {
@@ -122,15 +130,13 @@ export class AccountFormComponent {
   }
 
   uploadAvatar(event: any) {
-    console.log('event: ', event);
+    // console.log('event: ', event);
+    // const fileUpload = event.target.files[0];
+    // console.log('File upload: ', fileUpload);
     const fileUpload = event.target.files[0];
-    console.log('File upload: ', fileUpload);
-
-    const formData: FormData = new FormData();
-    formData.append('avatar', fileUpload, fileUpload.name);
 
     if (fileUpload) {
-      this.apiService.request('uploadAvatar', 'post', formData).subscribe((result: any) => {
+      this.employeeApi.apiEmployeeUploadPhotoPost(fileUpload).subscribe((result: any) => {
         console.log('Uploaded file: ', result);
         if (result) {
           this.uploadedFileUrl = result.secureUrl;
@@ -143,17 +149,16 @@ export class AccountFormComponent {
   }
 
   checkUsername() {
-
-    this.apiService.request('checkUsername', 'get', undefined, this.typedUsername, undefined).subscribe(
-      (response: any) => {
-        this.usernameExists = response;
-        const usernameControl = this.userForm?.get('username');
-        if (this.usernameExists) {
-          usernameControl?.setErrors(null);
-        } else {
-          usernameControl?.setErrors({ usernameExists: true });
-        }
-      }
-    );
+    // this.apiService.request('checkUsername', 'get', undefined, this.typedUsername, undefined).subscribe(
+    //   (response: any) => {
+    //     this.usernameExists = response;
+    //     const usernameControl = this.userForm?.get('username');
+    //     if (this.usernameExists) {
+    //       usernameControl?.setErrors(null);
+    //     } else {
+    //       usernameControl?.setErrors({ usernameExists: true });
+    //     }
+    //   }
+    // );
   }
 }

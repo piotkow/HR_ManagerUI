@@ -4,6 +4,8 @@ import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } 
 import { ButtonModule } from 'primeng/button';
 import { DividerModule } from 'primeng/divider';
 import { InputTextModule } from 'primeng/inputtext';
+import { LoginApi } from '../../../../libs/api-client';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -20,6 +22,8 @@ export class LoginComponent {
 
   constructor(
     private formBuilder : FormBuilder,
+    private loginApi: LoginApi,
+    private authService : AuthService
   ){}
 
   ngOnInit(): void{
@@ -31,16 +35,13 @@ export class LoginComponent {
   }
 
   login() {
-    // console.log('Login Form: ', this.loginForm?.value);
-    // this.apiService
-    //   .request('login', 'post', this.loginForm?.value)
-    //   .subscribe((result : {[key : string]: any}) => {
-    //     console.log("Login result:", result);
-    //     this.authService.login(result);
-    //   }, (error) => {
-    //     console.error('Login error:', error);
-    //     this.loginError = 'Username or password is incorrect';
-    //   });
+    this.loginApi.apiLoginPost(this.loginForm?.value)
+      .subscribe((result : {[key : string]: any}) => {
+        this.authService.login(result);
+      }, (error) => {
+        console.error('Login error:', error);
+        this.loginError = 'Username or password is incorrect';
+      });
   }
 
 

@@ -9,6 +9,7 @@ import { EmployeeCardComponent } from './components/employee-card/employee-card.
 import { EmployeeComponent } from './components/employee/employee.component';
 import { LoginComponent } from './components/login/login.component';
 import { EmployeeDashboardComponent } from './components/employee-dashboard/employee-dashboard.component';
+import { AccountFormComponent } from './components/accounts/account-form/account-form.component';
 
 export const routes: Routes = [
   { path: 'login', component: LoginComponent},
@@ -25,5 +26,6 @@ export const routes: Routes = [
     {path: 'detail/:id', component: EmployeeCardComponent},
   ]
   },
+  { path: 'employee-list/new', component: AccountFormComponent},
   { path: 'calendar', component: CalendarComponent }
 ];

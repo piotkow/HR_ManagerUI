@@ -11,13 +11,13 @@
  */
 
 
-export type Severity = 0 | 1 | 2 | 3 | 4;
+export type Severity = 'Cosmetic' | 'Minor' | 'Moderate' | 'Major' | 'Critical';
 
 export const Severity = {
-    NUMBER_0: 0 as Severity,
-    NUMBER_1: 1 as Severity,
-    NUMBER_2: 2 as Severity,
-    NUMBER_3: 3 as Severity,
-    NUMBER_4: 4 as Severity
+    Cosmetic: 'Cosmetic' as Severity,
+    Minor: 'Minor' as Severity,
+    Moderate: 'Moderate' as Severity,
+    Major: 'Major' as Severity,
+    Critical: 'Critical' as Severity
 };
 

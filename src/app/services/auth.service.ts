@@ -15,6 +15,7 @@ export class AuthService {
   private loggedInSubject = new BehaviorSubject<boolean>(this.storageService.get('isLoggedIn') || false);
   private accountApi = inject (AccountApi);
 
+
   login(result: { [key: string]: any }): void {
     const decodedToken = this.jwtHelperService.decodeToken(result['token']);
     let userObject : AccountEmployeeResponse;

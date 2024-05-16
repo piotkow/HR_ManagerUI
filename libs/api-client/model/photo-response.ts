@@ -13,6 +13,7 @@
 
 export interface PhotoResponse { 
     photoID?: number;
+    filename?: string | null;
     uri?: string | null;
 }
 

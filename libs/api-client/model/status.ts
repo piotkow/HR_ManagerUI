@@ -11,11 +11,11 @@
  */
 
 
-export type Status = 0 | 1 | 2;
+export type Status = 'Approved' | 'Pending' | 'Rejected';
 
 export const Status = {
-    NUMBER_0: 0 as Status,
-    NUMBER_1: 1 as Status,
-    NUMBER_2: 2 as Status
+    Approved: 'Approved' as Status,
+    Pending: 'Pending' as Status,
+    Rejected: 'Rejected' as Status
 };
 

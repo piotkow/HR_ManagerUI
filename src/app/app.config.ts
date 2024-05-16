@@ -10,8 +10,12 @@ import {
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { CalendarModule, DateAdapter, CalendarUtils } from 'angular-calendar';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
+import { JwtModule } from '@auth0/angular-jwt';
+import { AuthService } from './services/auth.service';
 
-
+export function tokenGetter(){
+  return localStorage.getItem('access_token')
+}
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -25,6 +29,14 @@ export const appConfig: ApplicationConfig = {
       provide: DateAdapter,
       useFactory: adapterFactory,
     })),
-    CalendarUtils
+    importProvidersFrom(
+      JwtModule.forRoot({
+        config: {
+          tokenGetter: tokenGetter
+        }
+      })
+    ),
+    CalendarUtils,
+    AuthService
   ],
 };

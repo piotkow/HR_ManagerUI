@@ -729,6 +729,113 @@
         }
       }
     },
+    "/api/Employee/upload-photo": {
+      "post": {
+        "tags": [
+          "Employee"
+        ],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "ContentType": {
+                    "type": "string"
+                  },
+                  "ContentDisposition": {
+                    "type": "string"
+                  },
+                  "Headers": {
+                    "type": "object",
+                    "additionalProperties": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    }
+                  },
+                  "Length": {
+                    "type": "integer",
+                    "format": "int64"
+                  },
+                  "Name": {
+                    "type": "string"
+                  },
+                  "FileName": {
+                    "type": "string"
+                  }
+                }
+              },
+              "encoding": {
+                "ContentType": {
+                  "style": "form"
+                },
+                "ContentDisposition": {
+                  "style": "form"
+                },
+                "Headers": {
+                  "style": "form"
+                },
+                "Length": {
+                  "style": "form"
+                },
+                "Name": {
+                  "style": "form"
+                },
+                "FileName": {
+                  "style": "form"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/PhotoResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PhotoResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PhotoResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Employee/delete-photo": {
+      "delete": {
+        "tags": [
+          "Employee"
+        ],
+        "parameters": [
+          {
+            "name": "employeeId",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
     "/api/Login": {
       "post": {
         "tags": [
@@ -1851,6 +1958,10 @@
             "type": "integer",
             "format": "int32"
           },
+          "filename": {
+            "type": "string",
+            "nullable": true
+          },
           "uri": {
             "type": "string",
             "nullable": true
@@ -2017,32 +2128,29 @@
       },
       "Role": {
         "enum": [
-          0,
-          1,
-          2
+          "Admin",
+          "HR",
+          "Employee"
         ],
-        "type": "integer",
-        "format": "int32"
+        "type": "string"
       },
       "Severity": {
         "enum": [
-          0,
-          1,
-          2,
-          3,
-          4
+          "Cosmetic",
+          "Minor",
+          "Moderate",
+          "Major",
+          "Critical"
         ],
-        "type": "integer",
-        "format": "int32"
+        "type": "string"
       },
       "Status": {
         "enum": [
-          0,
-          1,
-          2
+          "Approved",
+          "Pending",
+          "Rejected"
         ],
-        "type": "integer",
-        "format": "int32"
+        "type": "string"
       },
       "Team": {
         "required": [

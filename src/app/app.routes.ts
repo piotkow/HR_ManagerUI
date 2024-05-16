@@ -10,22 +10,27 @@ import { EmployeeComponent } from './components/employee/employee.component';
 import { LoginComponent } from './components/login/login.component';
 import { EmployeeDashboardComponent } from './components/employee-dashboard/employee-dashboard.component';
 import { AccountFormComponent } from './components/accounts/account-form/account-form.component';
+import { AuthGuard } from './guards/auth.guard';
+import { LoginGuard } from './guards/login.guard';
+
+
 
 export const routes: Routes = [
-  { path: 'login', component: LoginComponent},
-  { path: 'hr-dashboard', component: HrDashboardComponent },
-  { path: 'admin-dashboard', component: AdminDashboardComponent },
-  { path: 'employee-dashboard', component: EmployeeDashboardComponent},
-  { path: 'accounts', component: AccountsComponent },
+  { path: '', component: LoginComponent, canActivate: [LoginGuard]},
+  { path: '*', redirectTo: '/', pathMatch: 'full' },
+  { path: 'hr-dashboard', component: HrDashboardComponent, canActivate: [AuthGuard], data: {roles: ['HR', 'Admin']} },
+  { path: 'admin-dashboard', component: AdminDashboardComponent, canActivate: [AuthGuard], data: {roles: ['Admin']} },
+  { path: 'employee-dashboard', component: EmployeeDashboardComponent, canActivate: [AuthGuard] },
+  { path: 'accounts', component: AccountsComponent, canActivate: [AuthGuard]  },
   { path: '', redirectTo: '/hr-dashboard', pathMatch: 'full' },
-  { path: 'team-list', component: TeamListComponent},
-  { path: 'employee/:id', component: EmployeeComponent},
-  { path: 'calendar', component: CalendarComponent},
-  { path: 'employee-list', component: EmployeeListComponent,
+  { path: 'team-list', component: TeamListComponent, canActivate: [AuthGuard] },
+  { path: 'employee/:id', component: EmployeeComponent, canActivate: [AuthGuard] },
+  { path: 'calendar', component: CalendarComponent, canActivate: [AuthGuard] },
+  { path: 'employee-list', component: EmployeeListComponent, canActivate: [AuthGuard],
   children:[
-    {path: 'detail/:id', component: EmployeeCardComponent},
+    {path: 'detail/:id', component: EmployeeCardComponent, canActivate: [AuthGuard] },
   ]
   },
-  { path: 'employee-list/new', component: AccountFormComponent},
-  { path: 'calendar', component: CalendarComponent }
+  { path: 'employee-list/new', component: AccountFormComponent, canActivate: [AuthGuard] },
+  { path: 'calendar', component: CalendarComponent, canActivate: [AuthGuard]  }
 ];

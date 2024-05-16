@@ -12,6 +12,9 @@ import { CalendarModule, DateAdapter, CalendarUtils } from 'angular-calendar';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 import { JwtModule } from '@auth0/angular-jwt';
 import { AuthService } from './services/auth.service';
+import { AuthGuard } from './guards/auth.guard';
+import { LoginGuard } from './guards/login.guard';
+import { PermissionService } from './services/permission.service';
 
 export function tokenGetter(){
   return localStorage.getItem('access_token')

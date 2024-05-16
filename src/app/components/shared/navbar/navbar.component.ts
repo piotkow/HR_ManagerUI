@@ -6,6 +6,8 @@ import { OverlayPanelModule } from 'primeng/overlaypanel';
 import { ButtonModule } from 'primeng/button';
 import { ToggleButtonModule } from 'primeng/togglebutton'
 import { Router } from '@angular/router';
+import { AuthService } from '../../../services/auth.service';
+import { StorageService } from '../../../services/storage.service';
 
 @Component({
   selector: 'app-navbar',
@@ -16,7 +18,9 @@ import { Router } from '@angular/router';
 })
 export class NavbarComponent {
   constructor(
-    private router: Router
+    private router: Router,
+    private authService: AuthService,
+    private storageService: StorageService
   ){}
   items: MenuItem[] | undefined;
 
@@ -34,6 +38,6 @@ export class NavbarComponent {
   }
 
   logout(){
-    this.router.navigateByUrl('/login');
+    this.authService.logout();
   }
 }

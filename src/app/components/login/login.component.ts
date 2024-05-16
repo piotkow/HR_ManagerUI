@@ -35,8 +35,9 @@ export class LoginComponent {
   }
 
   login() {
-    this.loginApi.apiLoginPost(this.loginForm?.value)
-      .subscribe((result : {[key : string]: any}) => {
+    console.log("XD");
+    this.loginApi.apiLoginPost({accountLoginRequest: this.loginForm?.value}).subscribe((result : {[key : string]: any}) => {
+        console.log("Result",result);
         this.authService.login(result);
       }, (error) => {
         console.error('Login error:', error);

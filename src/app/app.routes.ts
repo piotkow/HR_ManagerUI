@@ -12,6 +12,7 @@ import { EmployeeDashboardComponent } from './components/employee-dashboard/empl
 import { AccountFormComponent } from './components/accounts/account-form/account-form.component';
 import { AuthGuard } from './guards/auth.guard';
 import { LoginGuard } from './guards/login.guard';
+import { TeamComponent } from './components/team/team.component';
 
 
 
@@ -21,16 +22,16 @@ export const routes: Routes = [
   { path: 'hr-dashboard', component: HrDashboardComponent, canActivate: [AuthGuard], data: {roles: ['HR', 'Admin']} },
   { path: 'admin-dashboard', component: AdminDashboardComponent, canActivate: [AuthGuard], data: {roles: ['Admin']} },
   { path: 'employee-dashboard', component: EmployeeDashboardComponent, canActivate: [AuthGuard] },
-  { path: 'accounts', component: AccountsComponent, canActivate: [AuthGuard]  },
+  { path: 'accounts', component: AccountsComponent, canActivate: [AuthGuard], data: {roles: ['HR', 'Admin']}  },
   { path: '', redirectTo: '/hr-dashboard', pathMatch: 'full' },
-  { path: 'team-list', component: TeamListComponent, canActivate: [AuthGuard] },
-  { path: 'employee/:id', component: EmployeeComponent, canActivate: [AuthGuard] },
-  { path: 'calendar', component: CalendarComponent, canActivate: [AuthGuard] },
-  { path: 'employee-list', component: EmployeeListComponent, canActivate: [AuthGuard],
+  { path: 'team-list', component: TeamListComponent, canActivate: [AuthGuard], data: {roles: ['HR', 'Admin','Employee']} },
+  { path: 'team/:id', component: TeamComponent, canActivate: [AuthGuard], data: {roles: ['HR', 'Admin','Employee']} },
+  { path: 'employee/:id', component: EmployeeComponent, canActivate: [AuthGuard] , data: {roles: ['HR', 'Admin']}},
+  { path: 'calendar', component: CalendarComponent, canActivate: [AuthGuard] , data: {roles: ['HR', 'Admin', 'Employee']}},
+  { path: 'employee-list', component: EmployeeListComponent, canActivate: [AuthGuard], data: {roles: ['HR', 'Admin']},
   children:[
-    {path: 'detail/:id', component: EmployeeCardComponent, canActivate: [AuthGuard] },
+    {path: 'detail/:id', component: EmployeeCardComponent, canActivate: [AuthGuard], data: {roles: ['HR', 'Admin']} },
   ]
   },
-  { path: 'employee-list/new', component: AccountFormComponent, canActivate: [AuthGuard] },
-  { path: 'calendar', component: CalendarComponent, canActivate: [AuthGuard]  }
+  { path: 'employee-list/new', component: AccountFormComponent, canActivate: [AuthGuard], data: {roles: ['HR', 'Admin']} }
 ];

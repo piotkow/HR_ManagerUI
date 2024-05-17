@@ -11,7 +11,7 @@ export class PermissionService {
   hasRole(roles: string[]) {
     const userStorageObject = this.storageService.get('user');
 
-    if (userStorageObject) return roles.includes(userStorageObject.role);
+    if (userStorageObject) return roles.includes(userStorageObject.accountType);
     else return false;
   }
 }

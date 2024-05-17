@@ -14,6 +14,7 @@ import { Status } from './status';
 
 export interface AbsenceRequest { 
     employeeID?: number;
+    description?: string | null;
     startDate?: string;
     endDate?: string;
     status?: Status;

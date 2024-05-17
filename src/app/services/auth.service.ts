@@ -32,13 +32,16 @@ export class AuthService {
           console.log("w admin");
           this.router.navigate(['/admin-dashboard']);
           this.loggedInSubject.next(true);
+          window.location.reload();
         }
         else if (userObject.accountType?.toString()=== 'HR'){
           this.router.navigate(['/hr-dashboard'])
+          window.location.reload();
         }
         else {
           this.router.navigate(['/employee-dashboard']);
           this.loggedInSubject.next(true);
+          window.location.reload();
         }
       });
     }
@@ -57,6 +60,6 @@ export class AuthService {
 
   getUserRole(): string {
     const user = this.storageService.get('user');
-    return user ? user.role : '';
+    return user ? user.accountType : '';
   }
 }

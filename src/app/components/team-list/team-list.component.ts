@@ -6,13 +6,14 @@ import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { Tag, TagModule } from 'primeng/tag';
 import { ButtonModule } from 'primeng/button';
+import { RouterLink } from '@angular/router';
 
 
 
 @Component({
   selector: 'app-team-list',
   standalone: true,
-  imports: [DataViewModule, RatingModule, CommonModule, FormsModule, TagModule, ButtonModule],
+  imports: [DataViewModule, RatingModule, CommonModule, FormsModule, TagModule, ButtonModule, RouterLink],
   templateUrl: './team-list.component.html',
   styleUrl: './team-list.component.css'
 })

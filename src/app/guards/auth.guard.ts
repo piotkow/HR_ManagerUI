@@ -17,7 +17,6 @@ export class AuthGuard implements CanActivate {
       map((loggedIn: boolean) => {
         if (loggedIn) {
           const requiredRoles = next.data['roles'] as string[]
-
       if (this.permissionService.hasRole(requiredRoles)) {
         return true;
       } else {

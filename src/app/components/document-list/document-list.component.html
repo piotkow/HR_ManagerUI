@@ -1,0 +1,21 @@
+<p-table [value]="documents" [tableStyle]="{ 'min-width': '50rem' }">
+    <ng-template pTemplate="header">
+        <tr>
+            <th>Filename</th>
+            <th>Issue date</th>
+            <th>URL</th>
+            <th></th>
+        </tr>
+        <p-toast />
+        <p-confirmDialog />
+    </ng-template>
+
+    <ng-template pTemplate="body" let-document>
+        <tr class="document-row">
+            <td>{{ document.filename}}</td>
+            <td>{{ document.issueDate | date}}</td>
+            <td><a [href]="document.uri">Download</a></td>
+            <td><p-button [size]="'large'" icon="pi pi-times" severity="danger" [rounded]="true" [text]="true" [raised]="true" (onClick)="confirmDialog(document.documentID)"></p-button></td>
+        </tr>
+    </ng-template>
+</p-table>

@@ -561,6 +561,87 @@
         }
       }
     },
+    "/byEmployee/{employeeId}": {
+      "get": {
+        "tags": [
+          "Document"
+        ],
+        "parameters": [
+          {
+            "name": "employeeId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/DocumentEmployeeResponse"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/DocumentEmployeeResponse"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/DocumentEmployeeResponse"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Document/upload-document": {
+      "post": {
+        "tags": [
+          "Document"
+        ],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "document": {
+                    "type": "string",
+                    "format": "binary"
+                  }
+                }
+              },
+              "encoding": {
+                "document": {
+                  "style": "form"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
     "/api/Employee": {
       "get": {
         "tags": [
@@ -845,17 +926,17 @@
             "content": {
               "text/plain": {
                 "schema": {
-                  "$ref": "#/components/schemas/PhotoResponse"
+                  "$ref": "#/components/schemas/FileResponse"
                 }
               },
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/PhotoResponse"
+                  "$ref": "#/components/schemas/FileResponse"
                 }
               },
               "text/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/PhotoResponse"
+                  "$ref": "#/components/schemas/FileResponse"
                 }
               }
             }
@@ -1615,7 +1696,7 @@
             "nullable": true
           },
           "photo": {
-            "$ref": "#/components/schemas/PhotoResponse"
+            "$ref": "#/components/schemas/FileResponse"
           },
           "dateOfEmployment": {
             "type": "string",
@@ -1661,8 +1742,6 @@
       },
       "Document": {
         "required": [
-          "content",
-          "documentType",
           "employeeID",
           "issueDate"
         ],
@@ -1676,18 +1755,17 @@
             "type": "integer",
             "format": "int32"
           },
-          "documentType": {
-            "maxLength": 50,
-            "minLength": 1,
-            "type": "string"
-          },
           "issueDate": {
             "type": "string",
             "format": "date-time"
           },
-          "content": {
+          "filename": {
             "type": "string",
-            "format": "byte"
+            "nullable": true
+          },
+          "uri": {
+            "type": "string",
+            "nullable": true
           },
           "employee": {
             "$ref": "#/components/schemas/Employee"
@@ -1698,6 +1776,10 @@
       "DocumentEmployeeResponse": {
         "type": "object",
         "properties": {
+          "documentID": {
+            "type": "integer",
+            "format": "int32"
+          },
           "firstName": {
             "type": "string",
             "nullable": true
@@ -1706,17 +1788,16 @@
             "type": "string",
             "nullable": true
           },
-          "documentType": {
-            "type": "string",
-            "nullable": true
-          },
           "issueDate": {
             "type": "string",
             "format": "date-time"
           },
-          "content": {
+          "filename": {
             "type": "string",
-            "format": "byte",
+            "nullable": true
+          },
+          "uri": {
+            "type": "string",
             "nullable": true
           }
         },
@@ -1729,7 +1810,7 @@
             "type": "integer",
             "format": "int32"
           },
-          "documentType": {
+          "filename": {
             "type": "string",
             "nullable": true
           },
@@ -1737,9 +1818,8 @@
             "type": "string",
             "format": "date-time"
           },
-          "content": {
+          "uri": {
             "type": "string",
-            "format": "byte",
             "nullable": true
           }
         },
@@ -1756,8 +1836,7 @@
           "phone",
           "positionID",
           "postalCode",
-          "street",
-          "teamID"
+          "street"
         ],
         "type": "object",
         "properties": {
@@ -1815,7 +1894,8 @@
           },
           "teamID": {
             "type": "integer",
-            "format": "int32"
+            "format": "int32",
+            "nullable": true
           },
           "position": {
             "$ref": "#/components/schemas/Position"
@@ -1903,6 +1983,10 @@
             "type": "string",
             "format": "date-time"
           },
+          "positionID": {
+            "type": "integer",
+            "format": "int32"
+          },
           "positionName": {
             "type": "string",
             "nullable": true
@@ -1910,6 +1994,10 @@
           "positionDescription": {
             "type": "string",
             "nullable": true
+          },
+          "teamID": {
+            "type": "integer",
+            "format": "int32"
           },
           "teamName": {
             "type": "string",
@@ -1924,7 +2012,7 @@
             "nullable": true
           },
           "photo": {
-            "$ref": "#/components/schemas/PhotoResponse"
+            "$ref": "#/components/schemas/FileResponse"
           }
         },
         "additionalProperties": false
@@ -1974,7 +2062,26 @@
           },
           "teamID": {
             "type": "integer",
+            "format": "int32",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "FileResponse": {
+        "type": "object",
+        "properties": {
+          "fileID": {
+            "type": "integer",
             "format": "int32"
+          },
+          "filename": {
+            "type": "string",
+            "nullable": true
+          },
+          "uri": {
+            "type": "string",
+            "nullable": true
           }
         },
         "additionalProperties": false
@@ -2000,24 +2107,6 @@
           },
           "employee": {
             "$ref": "#/components/schemas/Employee"
-          }
-        },
-        "additionalProperties": false
-      },
-      "PhotoResponse": {
-        "type": "object",
-        "properties": {
-          "photoID": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "filename": {
-            "type": "string",
-            "nullable": true
-          },
-          "uri": {
-            "type": "string",
-            "nullable": true
           }
         },
         "additionalProperties": false

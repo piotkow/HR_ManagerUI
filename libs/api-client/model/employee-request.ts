@@ -22,6 +22,6 @@ export interface EmployeeRequest {
     postalCode?: string | null;
     dateOfEmployment?: string;
     positionID?: number;
-    teamID?: number;
+    teamID?: number | null;
 }
 

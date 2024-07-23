@@ -11,11 +11,8 @@
  */
 
 
-export interface DocumentEmployeeResponse { 
-    documentID?: number;
-    firstName?: string | null;
-    lastName?: string | null;
-    issueDate?: string;
+export interface FileResponse { 
+    fileID?: number;
     filename?: string | null;
     uri?: string | null;
 }

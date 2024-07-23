@@ -21,7 +21,7 @@ export const routes: Routes = [
   { path: '*', redirectTo: '/', pathMatch: 'full' },
   { path: 'hr-dashboard', component: HrDashboardComponent, canActivate: [AuthGuard], data: {roles: ['HR', 'Admin']} },
   { path: 'admin-dashboard', component: AdminDashboardComponent, canActivate: [AuthGuard], data: {roles: ['Admin']} },
-  { path: 'employee-dashboard', component: EmployeeDashboardComponent, canActivate: [AuthGuard] },
+  { path: 'employee-dashboard', component: EmployeeDashboardComponent, canActivate: [AuthGuard], data: {roles: ['HR', 'Admin','Employee']} },
   { path: 'accounts', component: AccountsComponent, canActivate: [AuthGuard], data: {roles: ['HR', 'Admin']}  },
   { path: '', redirectTo: '/hr-dashboard', pathMatch: 'full' },
   { path: 'team-list', component: TeamListComponent, canActivate: [AuthGuard], data: {roles: ['HR', 'Admin','Employee']} },
@@ -33,5 +33,6 @@ export const routes: Routes = [
     {path: 'detail/:id', component: EmployeeCardComponent, canActivate: [AuthGuard], data: {roles: ['HR', 'Admin']} },
   ]
   },
-  { path: 'employee-list/new', component: AccountFormComponent, canActivate: [AuthGuard], data: {roles: ['HR', 'Admin']} }
+  { path: 'employee-list/new', component: AccountFormComponent, canActivate: [AuthGuard], data: {roles: ['HR', 'Admin']} },
+  { path: 'employee-list/:id', component: AccountFormComponent, canActivate: [AuthGuard], data: {roles: ['HR', 'Admin']} }
 ];

@@ -1,6 +1,6 @@
 
   <div class="flex justify-content-center flex-wrap" id="container">
-    <p-dataView #dv [value]="teamList">
+    <p-dataView #dv [value]="teamList" class="card">
         <ng-template pTemplate="list" let-products>
             <div class="grid grid-nogutter">
                 <div class="col-12" *ngFor="let item of teamList; let first = first">

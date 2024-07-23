@@ -15,9 +15,9 @@ import { Employee } from './employee';
 export interface Document { 
     documentID?: number;
     employeeID: number;
-    documentType: string;
     issueDate: string;
-    content: string;
+    filename?: string | null;
+    uri?: string | null;
     employee?: Employee;
 }
 

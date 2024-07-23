@@ -15,6 +15,8 @@ import { AuthService } from './services/auth.service';
 import { AuthGuard } from './guards/auth.guard';
 import { LoginGuard } from './guards/login.guard';
 import { PermissionService } from './services/permission.service';
+import { UploadComponent } from './components/upload/upload.component';
+import { ConfirmationService, MessageService } from 'primeng/api';
 
 export function tokenGetter(){
   return localStorage.getItem('access_token')
@@ -40,6 +42,8 @@ export const appConfig: ApplicationConfig = {
       })
     ),
     CalendarUtils,
-    AuthService
+    AuthService,
+    MessageService,
+    ConfirmationService
   ],
 };

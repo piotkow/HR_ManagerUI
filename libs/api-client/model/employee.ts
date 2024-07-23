@@ -30,7 +30,7 @@ export interface Employee {
     postalCode: string;
     dateOfEmployment: string;
     positionID: number;
-    teamID: number;
+    teamID?: number | null;
     position?: Position;
     team?: Team;
     account?: Account;

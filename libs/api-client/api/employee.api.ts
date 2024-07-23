@@ -23,7 +23,7 @@ import { EmployeePositionTeamResponse } from '../model/employee-position-team-re
 // @ts-ignore
 import { EmployeeRequest } from '../model/employee-request';
 // @ts-ignore
-import { PhotoResponse } from '../model/photo-response';
+import { FileResponse } from '../model/file-response';
 
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
@@ -667,9 +667,9 @@ export class EmployeeApi {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public apiEmployeeUploadPhotoPost(requestParameters: ApiEmployeeUploadPhotoPostRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json', context?: HttpContext, transferCache?: boolean}): Observable<PhotoResponse>;
-    public apiEmployeeUploadPhotoPost(requestParameters: ApiEmployeeUploadPhotoPostRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json', context?: HttpContext, transferCache?: boolean}): Observable<HttpResponse<PhotoResponse>>;
-    public apiEmployeeUploadPhotoPost(requestParameters: ApiEmployeeUploadPhotoPostRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json', context?: HttpContext, transferCache?: boolean}): Observable<HttpEvent<PhotoResponse>>;
+    public apiEmployeeUploadPhotoPost(requestParameters: ApiEmployeeUploadPhotoPostRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json', context?: HttpContext, transferCache?: boolean}): Observable<FileResponse>;
+    public apiEmployeeUploadPhotoPost(requestParameters: ApiEmployeeUploadPhotoPostRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json', context?: HttpContext, transferCache?: boolean}): Observable<HttpResponse<FileResponse>>;
+    public apiEmployeeUploadPhotoPost(requestParameters: ApiEmployeeUploadPhotoPostRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json', context?: HttpContext, transferCache?: boolean}): Observable<HttpEvent<FileResponse>>;
     public apiEmployeeUploadPhotoPost(requestParameters: ApiEmployeeUploadPhotoPostRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json', context?: HttpContext, transferCache?: boolean}): Observable<any> {
         const contentType = requestParameters.contentType;
         const contentDisposition = requestParameters.contentDisposition;
@@ -758,7 +758,7 @@ export class EmployeeApi {
         }
 
         let localVarPath = `/api/Employee/upload-photo`;
-        return this.httpClient.request<PhotoResponse>('post', `${this.configuration.basePath}${localVarPath}`,
+        return this.httpClient.request<FileResponse>('post', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
                 body: localVarConvertFormParamsToString ? localVarFormParams.toString() : localVarFormParams,

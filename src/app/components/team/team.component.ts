@@ -10,13 +10,14 @@ import { ProgressBarModule } from 'primeng/progressbar';
 import { DropdownModule } from 'primeng/dropdown';
 import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
+import { EmployeesDialogComponent } from "../employees-dialog/employees-dialog.component";
 
 @Component({
-  selector: 'app-team',
-  standalone: true,
-  imports: [TableModule, MultiSelectModule, FormsModule, ReactiveFormsModule, TagModule, ProgressBarModule, CommonModule, DropdownModule , ButtonModule, InputTextModule, RouterLink, RouterModule],
-  templateUrl: './team.component.html',
-  styleUrl: './team.component.css'
+    selector: 'app-team',
+    standalone: true,
+    templateUrl: './team.component.html',
+    styleUrl: './team.component.css',
+    imports: [TableModule, MultiSelectModule, FormsModule, ReactiveFormsModule, TagModule, ProgressBarModule, CommonModule, DropdownModule, ButtonModule, InputTextModule, RouterLink, RouterModule, EmployeesDialogComponent]
 })
 export class TeamComponent {
 
@@ -24,6 +25,7 @@ export class TeamComponent {
   teamEmployees: EmployeePositionTeamResponse [] = [];
   loading: boolean = true;
   departments!: any[];
+  team?: Team;
 
   @ViewChild('dt1') dt1!: Table;
 
@@ -36,9 +38,10 @@ export class TeamComponent {
   ngOnInit(){
     this.teamID = this.activatedRoute.snapshot.paramMap.get('id');
     this.getTeam();
+    this.getEmployees();
   }
 
-  getTeam(){
+  getEmployees(){
     this.employeeApi.apiEmployeeByTeamTeamIdGet({teamId:Number(this.teamID)}).subscribe((employees) => {
       if(employees){
         this.teamEmployees=employees;
@@ -46,6 +49,14 @@ export class TeamComponent {
         this.loading = false;
       }
   });
+  }
+
+  getTeam(){
+    this.teamApi.apiTeamIdGet({id:Number(this.teamID)}).subscribe((team) =>{
+      if(team){
+        this.team=team;
+      }
+    })
   }
 
   clear(table: Table) {
@@ -68,4 +79,6 @@ private getUniqueDepartments(employees: EmployeePositionTeamResponse[]): string[
   });
   return Array.from(departmentSet);
 }
+
+
 }

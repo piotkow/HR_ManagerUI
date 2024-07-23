@@ -9,8 +9,8 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
+import { FileResponse } from './file-response';
 import { Role } from './role';
-import { PhotoResponse } from './photo-response';
 
 
 export interface AccountEmployeeResponse { 
@@ -26,7 +26,7 @@ export interface AccountEmployeeResponse {
     city?: string | null;
     street?: string | null;
     postalCode?: string | null;
-    photo?: PhotoResponse;
+    photo?: FileResponse;
     dateOfEmployment?: string;
 }
 export namespace AccountEmployeeResponse {

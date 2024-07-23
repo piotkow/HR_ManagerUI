@@ -13,8 +13,8 @@
 
 export interface DocumentRequest { 
     employeeID?: number;
-    documentType?: string | null;
+    filename?: string | null;
     issueDate?: string;
-    content?: string | null;
+    uri?: string | null;
 }
 

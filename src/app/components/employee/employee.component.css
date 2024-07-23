@@ -53,3 +53,8 @@ img {
 ::ng-deep p-card{
   width: 100%;
 }
+
+.card{
+  border: 1px solid #424b57;
+  border-radius: 6px;
+}

@@ -46,7 +46,9 @@
                     </form>
                     }
             <div class="request-list">
+                @if(user?.employeeID){
                 <app-absence-request-list></app-absence-request-list>
+                }
             </div>
         </div>
     </div>

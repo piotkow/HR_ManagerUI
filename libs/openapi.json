@@ -1598,10 +1598,6 @@
       "AbsenceRequest": {
         "type": "object",
         "properties": {
-          "absenceId": {
-            "type": "integer",
-            "format": "int32"
-          },
           "employeeID": {
             "type": "integer",
             "format": "int32"
@@ -1631,6 +1627,10 @@
       "AbsencesEmployeeResponse": {
         "type": "object",
         "properties": {
+          "absenceId": {
+            "type": "integer",
+            "format": "int32"
+          },
           "firstName": {
             "type": "string",
             "nullable": true

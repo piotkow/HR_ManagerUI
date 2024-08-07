@@ -15,6 +15,7 @@ import { Role } from './role';
 
 export interface AccountEmployeeResponse { 
     accountID?: number;
+    employeeID?: number;
     username?: string | null;
     password?: string | null;
     accountType?: Role;

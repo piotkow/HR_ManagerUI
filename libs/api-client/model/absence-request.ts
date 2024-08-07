@@ -13,6 +13,7 @@ import { Status } from './status';
 
 
 export interface AbsenceRequest { 
+    absenceId?: number;
     employeeID?: number;
     description?: string | null;
     startDate?: string;

@@ -225,6 +225,54 @@
         }
       }
     },
+    "/api/Absence/byEmployee": {
+      "get": {
+        "tags": [
+          "Absence"
+        ],
+        "parameters": [
+          {
+            "name": "employeeId",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/AbsencesEmployeeResponse"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/AbsencesEmployeeResponse"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/AbsencesEmployeeResponse"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/Account": {
       "get": {
         "tags": [
@@ -1550,6 +1598,10 @@
       "AbsenceRequest": {
         "type": "object",
         "properties": {
+          "absenceId": {
+            "type": "integer",
+            "format": "int32"
+          },
           "employeeID": {
             "type": "integer",
             "format": "int32"
@@ -1649,6 +1701,10 @@
         "type": "object",
         "properties": {
           "accountID": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "employeeID": {
             "type": "integer",
             "format": "int32"
           },

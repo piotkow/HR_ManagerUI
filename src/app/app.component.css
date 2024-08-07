@@ -8,8 +8,10 @@
   margin-right: 0;
 }
 
-::ng-deep .col-10{
+::ng-deep .col{
   padding-left: 0;
   padding-right: 0;
+  height: 100vh;
 }
+
 

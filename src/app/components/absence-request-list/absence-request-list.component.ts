@@ -40,22 +40,20 @@ export class AbsenceRequestListComponent {
     this.subscription.add(this.refreshDataService.refreshSubject.subscribe((index) => {
       if (index === 'absence-request-list') {
         this.getAbsencesByEmployee(this.user.employeeID);
+        window.location.reload();
       }
     }))
   }
 
-  getAbsencesByEmployee(empId: number | undefined) {
-    if (empId) {
-      this.absenceApi.apiAbsenceByEmployeeGet({ employeeId: empId }).subscribe({
+  getAbsencesByEmployee(employeeId: number | undefined) {
+      this.absenceApi.apiAbsenceByEmployeeEmployeeIdGet({employeeId: 4}).subscribe({
         next:(res)=>{
           this.absences = res;
           console.log("nowa lista: ", this.absences);
         },
         error: (err)=>{
-
         }
       })
-    }
   }
 
   deleteAbsence(absenceId: number | undefined) {
@@ -64,6 +62,7 @@ export class AbsenceRequestListComponent {
         next: (res) => {
           this.getAbsencesByEmployee(this.user.employeeID);
           this.messageService.add({ severity: 'info', summary: 'Confirmed', detail: 'Record deleted' });
+          window.location.reload();
         },
         error: (err) => {
           console.log(err);

@@ -63,7 +63,7 @@ export class EmployeeComponent {
   }
 
   getDocuments(){
-    this.documentApi.byEmployeeEmployeeIdGet({employeeId:Number(this.employeeID)}).subscribe((documents)=>{
+    this.documentApi.apiDocumentByEmployeeEmployeeIdGet({employeeId:Number(this.employeeID)}).subscribe((documents)=>{
       if(documents){
         console.log("dokumenty w get:", documents);
         this.documents=documents;

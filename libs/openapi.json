@@ -225,7 +225,7 @@
         }
       }
     },
-    "/api/Absence/byEmployee": {
+    "/api/Absence/byEmployee/{employeeId}": {
       "get": {
         "tags": [
           "Absence"
@@ -233,7 +233,8 @@
         "parameters": [
           {
             "name": "employeeId",
-            "in": "query",
+            "in": "path",
+            "required": true,
             "schema": {
               "type": "integer",
               "format": "int32"
@@ -609,7 +610,7 @@
         }
       }
     },
-    "/byEmployee/{employeeId}": {
+    "/api/Document/byEmployee/{employeeId}": {
       "get": {
         "tags": [
           "Document"

@@ -40,7 +40,7 @@ export class DocumentListComponent {
 
   getDocuments() {
     if (this.employeeID) {
-      this.documentApi.byEmployeeEmployeeIdGet({ employeeId: Number(this.employeeID) }).subscribe((data) => {
+      this.documentApi.apiDocumentByEmployeeEmployeeIdGet({ employeeId: Number(this.employeeID) }).subscribe((data) => {
         this.documents = data;
       });
     }

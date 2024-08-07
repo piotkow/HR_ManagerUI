@@ -30,8 +30,8 @@ import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables'
 import { Configuration }                                     from '../configuration';
 
 
-export interface ApiAbsenceByEmployeeGetRequestParams {
-    employeeId?: number;
+export interface ApiAbsenceByEmployeeEmployeeIdGetRequestParams {
+    employeeId: number;
 }
 
 export interface ApiAbsenceByStatusGetRequestParams {
@@ -125,16 +125,13 @@ export class AbsenceApi {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public apiAbsenceByEmployeeGet(requestParameters: ApiAbsenceByEmployeeGetRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json', context?: HttpContext, transferCache?: boolean}): Observable<Array<AbsencesEmployeeResponse>>;
-    public apiAbsenceByEmployeeGet(requestParameters: ApiAbsenceByEmployeeGetRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json', context?: HttpContext, transferCache?: boolean}): Observable<HttpResponse<Array<AbsencesEmployeeResponse>>>;
-    public apiAbsenceByEmployeeGet(requestParameters: ApiAbsenceByEmployeeGetRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json', context?: HttpContext, transferCache?: boolean}): Observable<HttpEvent<Array<AbsencesEmployeeResponse>>>;
-    public apiAbsenceByEmployeeGet(requestParameters: ApiAbsenceByEmployeeGetRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json', context?: HttpContext, transferCache?: boolean}): Observable<any> {
+    public apiAbsenceByEmployeeEmployeeIdGet(requestParameters: ApiAbsenceByEmployeeEmployeeIdGetRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json', context?: HttpContext, transferCache?: boolean}): Observable<Array<AbsencesEmployeeResponse>>;
+    public apiAbsenceByEmployeeEmployeeIdGet(requestParameters: ApiAbsenceByEmployeeEmployeeIdGetRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json', context?: HttpContext, transferCache?: boolean}): Observable<HttpResponse<Array<AbsencesEmployeeResponse>>>;
+    public apiAbsenceByEmployeeEmployeeIdGet(requestParameters: ApiAbsenceByEmployeeEmployeeIdGetRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json', context?: HttpContext, transferCache?: boolean}): Observable<HttpEvent<Array<AbsencesEmployeeResponse>>>;
+    public apiAbsenceByEmployeeEmployeeIdGet(requestParameters: ApiAbsenceByEmployeeEmployeeIdGetRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json', context?: HttpContext, transferCache?: boolean}): Observable<any> {
         const employeeId = requestParameters.employeeId;
-
-        let localVarQueryParameters = new HttpParams({encoder: this.encoder});
-        if (employeeId !== undefined && employeeId !== null) {
-          localVarQueryParameters = this.addToHttpParams(localVarQueryParameters,
-            <any>employeeId, 'employeeId');
+        if (employeeId === null || employeeId === undefined) {
+            throw new Error('Required parameter employeeId was null or undefined when calling apiAbsenceByEmployeeEmployeeIdGet.');
         }
 
         let localVarHeaders = this.defaultHeaders;
@@ -182,11 +179,10 @@ export class AbsenceApi {
             }
         }
 
-        let localVarPath = `/api/Absence/byEmployee`;
+        let localVarPath = `/api/Absence/byEmployee/${this.configuration.encodeParam({name: "employeeId", value: employeeId, in: "path", style: "simple", explode: false, dataType: "number", dataFormat: "int32"})}`;
         return this.httpClient.request<Array<AbsencesEmployeeResponse>>('get', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
-                params: localVarQueryParameters,
                 responseType: <any>responseType_,
                 withCredentials: this.configuration.withCredentials,
                 headers: localVarHeaders,

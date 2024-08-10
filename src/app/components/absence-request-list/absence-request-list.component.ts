@@ -46,7 +46,8 @@ export class AbsenceRequestListComponent {
   }
 
   getAbsencesByEmployee(employeeId: number | undefined) {
-      this.absenceApi.apiAbsenceByEmployeeEmployeeIdGet({employeeId: 4}).subscribe({
+    if(this.user.employeeID){
+      this.absenceApi.apiAbsenceByEmployeeEmployeeIdGet({employeeId: this.user.employeeID}).subscribe({
         next:(res)=>{
           this.absences = res;
           console.log("nowa lista: ", this.absences);
@@ -54,6 +55,7 @@ export class AbsenceRequestListComponent {
         error: (err)=>{
         }
       })
+    }
   }
 
   deleteAbsence(absenceId: number | undefined) {

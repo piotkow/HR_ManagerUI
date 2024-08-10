@@ -29,6 +29,7 @@ export interface AccountEmployeeResponse {
     postalCode?: string | null;
     photo?: FileResponse;
     dateOfEmployment?: string;
+    teamID?: number;
 }
 export namespace AccountEmployeeResponse {
 }

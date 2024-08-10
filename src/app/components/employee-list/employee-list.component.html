@@ -1,70 +1,67 @@
-<div class="container flex flex-row" >
-    <p-table
-    class="card"
-        #dt1
-        [value]="employees"
-        dataKey="id"
-        [rows]="10"
-        [showCurrentPageReport]="true"
-        [rowsPerPageOptions]="[10, 25, 50]"
-        [loading]="loading"
-        [paginator]="true"
+<div class="container flex flex-row overflow-hidden justify-content-center">
+    <p-table class="card w-full" #dt1 [value]="employees" dataKey="id" [rows]="10" [showCurrentPageReport]="true"
+        [rowsPerPageOptions]="[10, 25, 50]" [loading]="loading" [paginator]="true"
         currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
-        [globalFilterFields]="['firstName', 'lastName', 'dateOfEmployment', 'department']"
-        >
+        [globalFilterFields]="['firstName', 'lastName', 'dateOfEmployment', 'department']">
         <ng-template pTemplate="caption">
             <div class="flex">
-                <button pButton label="Clear" class="p-button-outlined" icon="pi pi-filter-slash" (click)="clear(dt1)"></button>
+                <button pButton label="Clear" class="p-button-outlined" icon="pi pi-filter-slash"
+                    (click)="clear(dt1)"></button>
                 <span class="p-input-icon-left ml-2">
                     <i class="pi pi-search"></i>
                     <input pInputText type="text" (input)="onInputChange($event, dt1)" placeholder="Search keyword" />
                 </span>
-                <p-button icon="pi pi-plus" class="ml-auto" label="Add new" [raised]="true" routerLink="new"/>
+                <p-button icon="pi pi-plus" class="ml-auto" label="Add new" [raised]="true" routerLink="new" />
             </div>
         </ng-template>
         <ng-template pTemplate="header">
             <tr>
-                <th style="min-width:15rem">
+                <th>
                     <div class="flex align-items-center">
                         Lp.
                     </div>
                 </th>
 
-                <!-- country -->
-                <th style="min-width:15rem">
+                <th>
                     <div class="flex align-items-center">
-                      First Name
+                    </div>
+                </th>
+
+                <th>
+                    <div class="flex align-items-center">
+                        First Name
                         <p-columnFilter type="text" field="firstName" display="menu"></p-columnFilter>
                     </div>
                 </th>
-                <!-- country -->
-                <th style="min-width:15rem">
+
+                <th>
                     <div class="flex align-items-center">
-                      Last Name
+                        Last Name
                         <p-columnFilter type="text" field="lastName" display="menu"></p-columnFilter>
                     </div>
                 </th>
 
-                <th style="min-width:10rem">
+                <th>
                     <div class="flex align-items-center">
                         Date
                         <p-columnFilter type="date" field="dateOfEmployment" display="menu"></p-columnFilter>
                     </div>
                 </th>
 
-                <th style="min-width:15rem">
+                <th>
                     <div class="flex align-items-center">
-                      Team
+                        Team
                         <p-columnFilter type="text" field="teamName" display="menu"></p-columnFilter>
                     </div>
                 </th>
 
-                <th style="min-width:10rem">
+                <th>
                     <div class="flex align-items-center">
                         Department
                         <p-columnFilter field="department" matchMode="equals" display="menu">
                             <ng-template pTemplate="filter" let-value let-filter="filterCallback">
-                                <p-dropdown [ngModel]="value" [options]="departments" (onChange)="filter($event.value)" placeholder="Any">
+                                <p-dropdown [ngModel]="value" [options]="departments" (onChange)="filter($event.value)"
+                                    placeholder="Any">
                                     <ng-template let-option pTemplate="item">
                                         <p-tag [value]="option"></p-tag>
                                     </ng-template>
@@ -74,7 +71,7 @@
                     </div>
                 </th>
 
-                <th style="min-width:15rem">
+                <th>
                     <div class="flex align-items-center">
                     </div>
                 </th>
@@ -83,28 +80,37 @@
         <ng-template pTemplate="body" let-employee let-rowIndex="rowIndex">
 
             <tr class="employee-row" [routerLink]="['detail/',employee.employeeID]" (click)="showEmployeeCard = true;">
-              <td>
-                {{rowIndex+1}}
-              </td>
-              <td>
-                  <span class="ml-1 vertical-align-middle">{{ employee.firstName }}</span>
-              </td>
-              <td>
-                  <span class="ml-1 vertical-align-middle">{{ employee.lastName }}</span>
-              </td>
-              <td>
-                  {{ employee.dateOfEmployment | date: 'MM/dd/yyyy' }}
-              </td>
-              <td>
-                {{ employee.teamName}}
-              </td>
-              <td>
-                  <p-tag [value]="employee.department" ></p-tag>
-              </td>
-              <td>
-                <p-button [size]="'large'" icon="pi pi-arrow-right" severity="info" [rounded]="true" [text]="true" [raised]="true" [routerLink]="['/employee/',employee.employeeID]"></p-button>
-            </td>
-          </tr>
+                <td>
+                    {{rowIndex+1}}
+                </td>
+                <td>
+                    @if(employee.photo){
+                    <p-avatar shape="circle" [image]="employee.photo.uri" />
+                    }
+                    @else {
+                    <p-avatar shape="circle" icon="pi pi-user" />
+                    }
+                </td>
+                <td>
+                    <span class="ml-1 vertical-align-middle">{{ employee.firstName }}</span>
+                </td>
+                <td>
+                    <span class="ml-1 vertical-align-middle">{{ employee.lastName }}</span>
+                </td>
+                <td>
+                    {{ employee.dateOfEmployment | date: 'MM/dd/yyyy' }}
+                </td>
+                <td>
+                    {{ employee.teamName}}
+                </td>
+                <td>
+                    <p-tag [value]="employee.department"></p-tag>
+                </td>
+                <td>
+                    <p-button [size]="'large'" icon="pi pi-arrow-right" severity="info" [rounded]="true" [text]="true"
+                        [raised]="true" [routerLink]="['/employee/',employee.employeeID]"></p-button>
+                </td>
+            </tr>
 
         </ng-template>
         <ng-template pTemplate="emptymessage">
@@ -113,10 +119,9 @@
             </tr>
         </ng-template>
     </p-table>
-  <div *ngIf="showEmployeeCard">
-    <div class="col-7">
-      <router-outlet></router-outlet>
+    <div *ngIf="showEmployeeCard">
+        <div class="col">
+            <router-outlet></router-outlet>
+        </div>
     </div>
-  </div>
-
 </div>

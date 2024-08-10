@@ -7,3 +7,20 @@
     padding: 0;
     border-radius: 5px;
 }
+
+.cards{
+    overflow-y: auto;
+    border: solid #1f2937;
+}
+
+::ng-deep .p-tabview .p-tabview-panels {
+    background-color: transparent;
+}
+
+::ng-deep p-card .p-component{
+    margin-top: 0.5rem;
+}
+
+::ng-deep p-card .p-card-content{
+    padding: 0;
+}

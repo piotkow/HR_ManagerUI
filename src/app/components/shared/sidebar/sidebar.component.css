@@ -3,7 +3,7 @@
       background-image:none;
       border:none;
       color:white;
-      min-height: 100vh;
+      height: 100%;
       border-radius: 0;
       min-width: 10vw;
 }

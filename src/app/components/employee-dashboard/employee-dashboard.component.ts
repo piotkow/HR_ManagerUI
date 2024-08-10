@@ -47,7 +47,7 @@ export class EmployeeDashboardComponent implements OnInit {
   ngOnInit(): void {
     const user: AccountEmployeeResponse = this.storageService.get('user');
     this.absenceForm = this.formBuilder.group({
-      employeeID: [user.accountID, Validators.required],
+      employeeID: [user.employeeID, Validators.required],
       description: ['', Validators.required],
       startDate: ['', [Validators.required]],
       endDate: ['', Validators.required],

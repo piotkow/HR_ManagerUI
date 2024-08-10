@@ -1,6 +1,7 @@
 ::ng-deep .col-fixed {
   padding-right: 0;
   padding-left: 0;
+
 }
 
 ::ng-deep .grid{
@@ -8,10 +9,28 @@
   margin-right: 0;
 }
 
-::ng-deep .col{
+::ng-deep #main-col{
   padding-left: 0;
   padding-right: 0;
-  height: 100vh;
+  height: 93vh;
 }
 
+.navbar{
+  position: fixed;
+  width: 100%;
+  z-index: 8000;
+}
 
+.sidebar{
+  position: fixed;
+  height: 100vh;
+  padding-top: 7vh;
+  z-index: 1000;
+}
+
+.content{
+  padding-left: 10vw;
+  padding-top: 7vh;
+  z-index: 10;
+  width: 100%;
+}

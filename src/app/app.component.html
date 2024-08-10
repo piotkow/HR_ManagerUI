@@ -1,10 +1,10 @@
 @if(isLoggedIn){
-<app-navbar></app-navbar>
-<div class="grid">
-  <div class="col-fixed">
+<app-navbar class="navbar"></app-navbar>
+<div class="container flex flex-row">
+  <div class="sidebardiv">
   <app-sidebar class="sidebar"></app-sidebar>
   </div>
-  <div class="col">
+  <div class="content">
     <router-outlet></router-outlet>
   </div>
 </div>

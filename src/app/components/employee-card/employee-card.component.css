@@ -1,3 +1,13 @@
 .container{
   margin-left: 3vh;
 }
+
+.avatar img.employee-photo {
+  max-width: 100px; /* Maksymalna szerokość zdjęcia */
+  max-height: 100px; /* Maksymalna wysokość zdjęcia */
+  width: auto; /* Utrzymuje proporcje zdjęcia */
+  height: auto; /* Utrzymuje proporcje zdjęcia */
+  border-radius: 50%; /* Opcjonalnie: dodaje zaokrąglone rogi, aby zdjęcie miało kształt awatara */
+  min-height: 100px;
+  min-width: 100px;
+}

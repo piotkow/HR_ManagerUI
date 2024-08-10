@@ -11,13 +11,14 @@ import { DropdownModule } from 'primeng/dropdown';
 import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
 import { EmployeesDialogComponent } from "../employees-dialog/employees-dialog.component";
+import { AvatarModule } from 'primeng/avatar';
 
 @Component({
     selector: 'app-team',
     standalone: true,
     templateUrl: './team.component.html',
     styleUrl: './team.component.css',
-    imports: [TableModule, MultiSelectModule, FormsModule, ReactiveFormsModule, TagModule, ProgressBarModule, CommonModule, DropdownModule, ButtonModule, InputTextModule, RouterLink, RouterModule, EmployeesDialogComponent]
+    imports: [TableModule, MultiSelectModule, FormsModule, ReactiveFormsModule, TagModule, ProgressBarModule, CommonModule, DropdownModule, ButtonModule, InputTextModule, RouterLink, RouterModule, EmployeesDialogComponent, AvatarModule]
 })
 export class TeamComponent {
 

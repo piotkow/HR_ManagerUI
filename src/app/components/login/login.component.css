@@ -2,3 +2,19 @@
     position: relative;
 }
 
+.showPassword {
+    position: absolute;
+}
+
+.card {
+    width: 50vh;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 10px;
+    backdrop-filter: blur(8px);
+    background: var(--highlight-bg);  
+    background-color: var(--highlight-bg);
+    color: var(--highlight-text-color);  
+}

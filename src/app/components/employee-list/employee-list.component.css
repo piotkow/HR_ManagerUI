@@ -9,8 +9,8 @@
 }
 
 
-::ng-deep p-table{
-  width: 100%;
+::ng-deep p-table .myCard{
+  border-radius: 20%;
 }
 
 

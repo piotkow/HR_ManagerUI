@@ -1,5 +1,5 @@
 <div class="grid nested-grid">
-    <div class="h-full p-5 w-8 ml-8">
+    <div class="h-full p-5 w-7 ml-8">
         <app-full-calendar (newItemEvent)="getDate($event)"></app-full-calendar>
     </div>
     <div class="flex h-full p-8 w-3 flex-row">
@@ -45,7 +45,7 @@
                         </div>
                     </form>
                     }
-            <div class="request-list">
+            <div class="request-list h-30rem">
                 @if(user?.employeeID){
                 <app-absence-request-list></app-absence-request-list>
                 }

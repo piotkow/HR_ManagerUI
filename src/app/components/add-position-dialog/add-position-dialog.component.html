@@ -1,0 +1,17 @@
+<p-button icon="pi pi-plus" (click)="showDialog()" class="ml-auto" label="Add new" [raised]="true" />
+<p-dialog header="Add new department" [modal]="true" [(visible)]="visible" class="w-auto">
+    <div class="flex flex-column">
+        <div class="Name mb-3 field-grid">
+            <label for="firstName" class="form-label fw-bold">Position Name: </label>
+            <input type="text" [(ngModel)]="positionName" class="p-2 w-full mt-2" pInputText>
+        </div>
+        <div class="Description mb-3 field-grid">
+            <label for="firstName" class="form-label fw-bold">Position Description: </label>
+            <input type="text" class="p-2 w-full mt-2" [(ngModel)]="positionDescription" pInputText>
+        </div>
+    </div>
+    <div class="flex justify-content-end gap-2 mt-4">
+        <p-button label="Cancel" severity="secondary" (click)="visible = false" />
+        <p-button label="Save" (click)="addNewPosition()" />
+    </div>
+</p-dialog>

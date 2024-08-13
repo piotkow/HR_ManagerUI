@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { ButtonModule } from 'primeng/button';
 import { DialogModule } from 'primeng/dialog';
-import { EmployeeApi, EmployeePositionTeamResponse } from '../../../../libs/api-client';
+import { DepartmentApi, EmployeeApi, EmployeePositionTeamResponse } from '../../../../libs/api-client';
 import { Router } from '@angular/router';
 import { CheckboxModule } from 'primeng/checkbox';
 import { CommonModule } from '@angular/common';
@@ -35,24 +35,21 @@ export class EmployeesDialogComponent {
 
   constructor(
     private employeeApi : EmployeeApi,
-    private router : Router
+    private router : Router,
+    private departmentApi: DepartmentApi
     ) {}
 
   getAllEmployees(){
     this.employeeApi.apiEmployeeGet().subscribe((employees) => {
       this.employees = employees;
-      this.departments = this.getUniqueDepartments(employees);
+      this.getUniqueDepartments();
   });
   }
 
-  private getUniqueDepartments(employees: EmployeePositionTeamResponse[]): string[] {
-    const departmentSet = new Set<string>();
-    employees.forEach((employee) => {
-      if(employee.department){
-        departmentSet.add(employee.department);
-      }
-    });
-    return Array.from(departmentSet);
+  private getUniqueDepartments() {
+    this.departmentApi.apiDepartmentGet().subscribe(result=>{
+      this.departments=result;
+    })
   }
 
   addNewTeamMember(){

@@ -1,0 +1,35 @@
+<div class="card">
+    <p-table
+        [value]="departments"
+        [paginator]="true"
+        [rows]="5"
+        [tableStyle]="{ 'min-width': '50rem' }"
+        [rowsPerPageOptions]="[5, 10, 20]"
+        styleClass="p-datatable-striped" 
+    >
+    <ng-template pTemplate="caption">
+        <div class="flex">
+            <button pButton label="Clear" class="p-button-outlined" icon="pi pi-filter-slash"
+                (click)="clear(dt1)"></button>
+            <span class="p-input-icon-left ml-2">
+                <i class="pi pi-search"></i>
+                <input pInputText type="text" (input)="onInputChange($event, dt1)" placeholder="Search keyword" />
+            </span>
+            <app-add-department-dialog class="ml-auto"></app-add-department-dialog>
+        </div>
+    </ng-template>
+    
+        <ng-template pTemplate="header">
+            <tr>
+                <th style="width:90%">Department</th>
+                <th style="width:10%"></th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-department>
+            <tr>
+                <td>{{ department.name }}</td>
+                <td><p-button [size]="'large'" icon="pi pi-times" severity="danger" [rounded]="true" [text]="true" [raised]="true" (onClick)="confirmDialog(department.derpartmentID)"></p-button></td>
+            </tr>
+        </ng-template>
+    </p-table>
+</div>

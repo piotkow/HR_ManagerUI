@@ -13,6 +13,7 @@ import { AccountFormComponent } from './components/accounts/account-form/account
 import { AuthGuard } from './guards/auth.guard';
 import { LoginGuard } from './guards/login.guard';
 import { TeamComponent } from './components/team/team.component';
+import { SettingsComponent } from './components/settings/settings.component';
 
 
 
@@ -26,7 +27,7 @@ export const routes: Routes = [
   { path: '', redirectTo: '/hr-dashboard', pathMatch: 'full' },
   { path: 'team-list', component: TeamListComponent, canActivate: [AuthGuard], data: {roles: ['HR', 'Admin','Employee']} },
   { path: 'team/:id', component: TeamComponent, canActivate: [AuthGuard], data: {roles: ['HR', 'Admin','Employee']} },
-  { path: 'employee/:id', component: EmployeeComponent, canActivate: [AuthGuard] , data: {roles: ['HR', 'Admin']}},
+  { path: 'employee/:id', component: EmployeeComponent, canActivate: [AuthGuard] , data: {roles: ['HR', 'Admin', 'Employee']}},
   { path: 'calendar', component: CalendarComponent, canActivate: [AuthGuard] , data: {roles: ['HR', 'Admin', 'Employee']}},
   { path: 'employee-list', component: EmployeeListComponent, canActivate: [AuthGuard], data: {roles: ['HR', 'Admin']},
   children:[
@@ -34,5 +35,7 @@ export const routes: Routes = [
   ]
   },
   { path: 'employee-list/new', component: AccountFormComponent, canActivate: [AuthGuard], data: {roles: ['HR', 'Admin']} },
-  { path: 'employee-list/:id', component: AccountFormComponent, canActivate: [AuthGuard], data: {roles: ['HR', 'Admin']} }
+  { path: 'employee-list/:id', component: AccountFormComponent, canActivate: [AuthGuard], data: {roles: ['HR', 'Admin','Employee']} },
+  { path: 'settings', component: SettingsComponent, canActivate: [AuthGuard], data: {roles: ['HR', 'Admin']} }
+
 ];

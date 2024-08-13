@@ -65,6 +65,7 @@ export class EmployeeFormComponent {
     if(this.employeeId){
     this.employeeApi.apiEmployeeIdGet({id:Number(this.employeeId)}).subscribe(user => {
       if (user) {
+        console.log('user z ktorego patchuje dane:', user);
         this.employeeForm?.patchValue(user);
         this.employeeDetails = user;
       }

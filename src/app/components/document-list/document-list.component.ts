@@ -49,8 +49,9 @@ export class DocumentListComponent {
   deleteDocument(documentId: number) {
     this.documentApi.apiDocumentIdDelete({ id: documentId }).subscribe({
       next: (res) => {
-        this.refreshDataService.refresh('document-list');
-        this.messageService.add({ severity: 'info', summary: 'Confirmed', detail: 'Record deleted' });
+        console.log(" doc id: ", documentId)
+;        this.refreshDataService.refresh('document-list');
+        this.messageService.add({ severity: 'success', summary: 'Confirmed', detail: 'Record deleted' });
       },
       error: (err)=>{
         console.log("error while delete document:", err);

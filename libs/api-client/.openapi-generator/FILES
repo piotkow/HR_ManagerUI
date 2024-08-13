@@ -4,9 +4,11 @@ api.module.ts
 api/absence.api.ts
 api/account.api.ts
 api/api.ts
+api/department.api.ts
 api/document.api.ts
 api/employee.api.ts
 api/login.api.ts
+api/photo.api.ts
 api/position.api.ts
 api/report.api.ts
 api/team.api.ts
@@ -21,6 +23,8 @@ model/account-employee-response.ts
 model/account-login-request.ts
 model/account-request.ts
 model/account.ts
+model/department-request.ts
+model/department.ts
 model/document-employee-response.ts
 model/document-request.ts
 model/document.ts
@@ -29,6 +33,7 @@ model/employee-request.ts
 model/employee.ts
 model/file-response.ts
 model/models.ts
+model/photo-request.ts
 model/photo.ts
 model/position-request.ts
 model/position.ts
@@ -38,6 +43,7 @@ model/report.ts
 model/role.ts
 model/severity.ts
 model/status.ts
+model/team-department-response.ts
 model/team-request.ts
 model/team.ts
 param.ts

@@ -63,7 +63,7 @@
                                 <p-dropdown [ngModel]="value" [options]="departments" (onChange)="filter($event.value)"
                                     placeholder="Any">
                                     <ng-template let-option pTemplate="item">
-                                        <p-tag [value]="option"></p-tag>
+                                        <p-tag [value]=""></p-tag>
                                     </ng-template>
                                 </p-dropdown>
                             </ng-template>
@@ -104,7 +104,7 @@
                     {{ employee.teamName}}
                 </td>
                 <td>
-                    <p-tag [value]="employee.department"></p-tag>
+                    <p-tag [value]="employee.departmentName"></p-tag>
                 </td>
                 <td>
                     <p-button [size]="'large'" icon="pi pi-arrow-right" severity="info" [rounded]="true" [text]="true"

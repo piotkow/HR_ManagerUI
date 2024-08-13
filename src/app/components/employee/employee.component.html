@@ -1,11 +1,12 @@
 <div class="grid flex justify-content-center flex-wrap w-full">
+  <p-toast />
   <div class="w-full mt-4 ml-2 mr-0">
     <p-card>
-      <div class="flex container-fluid h-full">
+      <div class="flex container-fluid h-full w-full">
         <div class="col-2 border-round-lg w-2">
           <p-image src="{{employee?.photo?.uri}}" alt="Image" width="100%" height="100%" [preview]="true"></p-image>
         </div>
-        <div class="w-4 flex flex-column h-full">
+        <div class="flex flex-column h-full w-full">
           <div class="align-items-center justify-content-center text-3xl font-normal">
             <span>{{employee?.firstName}} {{employee?.lastName}}</span>
           </div>
@@ -16,6 +17,11 @@
             <span> {{employee?.teamName}} </span>
           </div>
         </div>
+        <div class="edit flex justify-content-end">
+          @if(loggedUser?.employeeID?.toString() == employeeID || loggedUser?.accountType=='HR'){
+          <p-button icon="pi pi-user-edit"  label="Edit" [rounded]="true" [text]="true" [raised]="true" severity="secondary" [routerLink]="['/employee-list/',employee?.employeeID]" />
+          }
+      </div>
       </div>
     </p-card>
   </div>
@@ -25,20 +31,23 @@
         <div class="row">
           <div class="col">
 
+            @if(loggedUser?.employeeID?.toString() == employeeID || loggedUser?.accountType == 'HR'){
             <p class="font-normal">
               <i class="pi pi-map-marker"></i>
               {{employee?.street}}, {{employee?.city}}, {{employee?.postalCode}} {{employee?.country}}
             </p>
+          }
 
             <p class="font-light">
               <i class="pi pi-envelope"></i>
               {{employee?.email}}
             </p>
-
+            @if(loggedUser?.employeeID?.toString() == employeeID || loggedUser?.accountType == 'HR'){
             <p class="font-light">
               <i class="pi pi-phone"></i>
               {{employee?.phone}}
             </p>
+          }
           </div>
         </div>
       </div>
@@ -59,6 +68,7 @@
     </div>
   </div>
 
+  @if(loggedUser?.accountType == 'HR'){
   <div class="p-3 w-full">
     <app-upload [employeeID]="employeeID" class="mt-2 w-full"></app-upload>
 
@@ -78,5 +88,6 @@
       }
     </div>
   </div>
+}
 
 </div>

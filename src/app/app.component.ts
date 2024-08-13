@@ -5,6 +5,8 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { NavbarComponent } from "./components/shared/navbar/navbar.component";
 import { SidebarComponent } from "./components/shared/sidebar/sidebar.component";
 import { AuthService } from './services/auth.service';
+import { ToastModule } from 'primeng/toast';
+import { ConfirmDialog, ConfirmDialogModule } from 'primeng/confirmdialog';
 
 
 
@@ -13,7 +15,7 @@ import { AuthService } from './services/auth.service';
     standalone: true,
     templateUrl: './app.component.html',
     styleUrl: './app.component.css',
-    imports: [RouterOutlet, HttpClientModule, NavbarComponent, SidebarComponent]
+    imports: [RouterOutlet, HttpClientModule, NavbarComponent, SidebarComponent, ToastModule, ConfirmDialogModule]
 })
 export class AppComponent {
   title = 'app';

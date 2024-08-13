@@ -1,10 +1,10 @@
 <div class="container my-5 flex justify-content-center flex-wrap">
+    <p-toast />
     <div class="card bg-secondary w-5 p-5">
         <div class="card-body">
             @if(accountEmployeeForm){
                 <form [formGroup]="accountEmployeeForm">
                     <h6 class="form-heading text-center">Account Information</h6>
-                    <!-- Role -->
                     <div class="mb-3 field-grid">
                         <div class="field col">
                             <label for="accountType" class="form-label fw-bold">Account Type <sub class="text-danger">*</sub></label>
@@ -24,7 +24,6 @@
                             Role is required
                         </span>
                     </div>
-                    <!-- Username --> 
                     <div class="mb-3 field-grid">
                         <div class="field col">
                         <label for="username" class="form-label fw-bold">Username <sub class="text-danger">*</sub></label>
@@ -41,13 +40,13 @@
                         </span>
                         </div>
                     </div>
-                    <!-- Password -->
                     <div class="mb-3 field-grid"> 
                         <div class="field col">
                         <label for="password" class="form-label fw-bold">Password <sub class="text-danger">*</sub></label>
                         <input type="password" pInputText formControlName="password" class="form-control p-2 w-full" id="password" [ngClass]="{
                                 'ng-invalid': accountEmployeeForm.controls['password'].invalid && accountEmployeeForm.controls['password'].dirty
-                            }" />
+                            }"
+                            [readonly]="loggedUser?.accountType == 'HR' && loggedUser?.employeeID?.toString() != employeeId && accountId" />
                         <ng-container *ngIf="accountEmployeeForm.controls['password'].invalid && accountEmployeeForm.controls['password'].dirty">
                             <div *ngIf="accountEmployeeForm.controls['password'].hasError('required')" class="text-danger">
                                 {{ passwordErrorMessages.required }}
@@ -182,7 +181,7 @@
                         <label for="dateOfEmployment" class="form-label fw-bold">Date of employment <sub
                                 class="text-danger">*</sub></label>
                                 <div class="input-group">
-                        <p-calendar formControlName="dateOfEmployment" class="form-control" id="dateOfEmployment" [ngClass]="{
+                        <p-calendar [showIcon]="true" [iconDisplay]="'input'"  formControlName="dateOfEmployment" class="form-control" id="dateOfEmployment" [ngClass]="{
                         'ng-invalid':accountEmployeeForm.controls['dateOfEmployment'].invalid && accountEmployeeForm.controls['dateOfEmployment'].dirty,
                         'is-valid':accountEmployeeForm.controls['dateOfEmployment'].valid
                       }"/>
@@ -228,7 +227,7 @@
                         Position: {{accountEmployeeForm.controls['positionID'].value}}, 
                         Team: {{accountEmployeeForm.controls['teamID'].value}} -->
 
-                        AccountType: {{accountEmployeeForm.controls['accountType'].valid}},
+                        <!-- AccountType: {{accountEmployeeForm.controls['accountType'].valid}},
                         Username: {{accountEmployeeForm.controls['username'].valid}},
                         Password: {{accountEmployeeForm.controls['password'].valid}},
                         First Name: {{accountEmployeeForm.controls['firstName'].valid}}, 
@@ -241,23 +240,24 @@
                         Postal Code: {{accountEmployeeForm.controls['postalCode'].valid}}, 
                         Date of Employment: {{accountEmployeeForm.controls['dateOfEmployment'].valid}}, 
                         Position: {{accountEmployeeForm.controls['positionID'].valid}}, 
-                        Team: {{accountEmployeeForm.controls['teamID'].value}}
+                        Team: {{accountEmployeeForm.controls['teamID'].value}} -->
                       </span>
                       
 
                     <!--Avatar-->
-                    <div class="label mb" style="color: #555d71">
+                    <!-- <div class="label mb" style="color: #555d71">
                         <label for="avatar" class="form-label fw-bold">Avatar</label>
                         <div class="description d-flex align-items-center gap-2">
                             <i class="icons8-f-info" style="font-size: 1.25rem"></i>
                             <span> Only JPG, PNG and GIF files are allowed.</span>
                         </div>
-                    </div>
+                    </div> -->
             
+                    @if(accountId){
                     <p-fileUpload 
                     name="demo[]" 
-                    url="https://www.primefaces.org/cdn/api/upload.php" 
-                    (onUpload)="uploadAvatar($event)" 
+                    url="https://www.primefaces.org/cdn/api/upload.php"
+                    (onUpload)="employeeDetails?.photo ? editPhoto($event) : onUpload($event)" 
                     [multiple]="false" 
                     accept="image/*" 
                     [maxFileSize]="1000000">
@@ -270,11 +270,12 @@
                         </ng-template>
                     </p-fileUpload>
                     <img *ngIf="selectedImage" [src]="selectedImage" alt="Avatar" class="mt-3 fixed-image">
-                    <span>
+                }
+                    <!-- <span>
                         {{accountEmployeeForm.controls['accountType'].value}}
                         {{accountEmployeeForm.controls['username'].value}}
                         {{accountEmployeeForm.controls['password'].value}}
-                      </span>
+                      </span> -->
                       <div class="mt-3 mb-3">
                         <p-button *ngIf="!employeeId" (click)="saveUser()" class="btn btn-primary" [disabled]="accountEmployeeForm.invalid">
                             <i class="icons8-f-plus-math"></i>

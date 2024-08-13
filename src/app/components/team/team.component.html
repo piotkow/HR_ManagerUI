@@ -1,18 +1,18 @@
 <div class="grid justify-content-center">
-    <div class="card mt-5 w-2">
+    <div class="mt-5 w-2">
         <div class="header flex justify-content-center font-normal">
             <h2>{{team?.teamName}}</h2>
         </div>
         <div class="content text-center">
             <p class="font-light">{{team?.teamDescription}}</p>
-            <p-tag [value]="team?.department"></p-tag>
+            <p-tag [value]="team?.departmentName ?? undefined"></p-tag>
         </div>
     </div>
     <div class="container flex flex-row ">
         <p-table class="card" #dt1 [value]="teamEmployees" dataKey="id" [rows]="10" [showCurrentPageReport]="true"
             [rowsPerPageOptions]="[10, 25, 50]" [loading]="loading" [paginator]="true"
             currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
-            [globalFilterFields]="['firstName', 'lastName', 'dateOfEmployment', 'department']">
+            [globalFilterFields]="['firstName', 'lastName']">
             <ng-template pTemplate="caption">
                 <div class="flex">
                     <button pButton label="Clear" class="p-button-outlined" icon="pi pi-filter-slash"
@@ -22,7 +22,9 @@
                         <input pInputText type="text" (input)="onInputChange($event, dt1)"
                             placeholder="Search keyword" />
                     </span>
+                    @if(user?.accountType !== 'Employee'){
                     <app-employees-dialog [teamId]="teamID"></app-employees-dialog>
+                    }
                 </div>
             </ng-template>
             <ng-template pTemplate="header">

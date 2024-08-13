@@ -18,7 +18,7 @@
 .navbar{
   position: fixed;
   width: 100%;
-  z-index: 8000;
+  z-index: 5000;
 }
 
 .sidebar{
@@ -33,4 +33,9 @@
   padding-top: 7vh;
   z-index: 10;
   width: 100%;
+}
+
+.toast{
+  position: fixed;
+  z-index: 9000;
 }

@@ -6,6 +6,7 @@ color: var(--highlight-text-color);
 border-radius: 0px;
 backdrop-filter: blur(8px);
 background: var(--highlight-bg);
+height: 7vh;
 }
 
 img {

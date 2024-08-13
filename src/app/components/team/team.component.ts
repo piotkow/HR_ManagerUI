@@ -1,6 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
 import { ActivatedRoute, RouterLink, RouterModule } from '@angular/router';
-import { EmployeeApi, EmployeePositionTeamResponse, Team, TeamApi } from '../../../../libs/api-client';
+import { AccountEmployeeResponse, Department, DepartmentApi, EmployeeApi, EmployeePositionTeamResponse, Team, TeamApi, TeamDepartmentResponse } from '../../../../libs/api-client';
 import { Table, TableModule } from 'primeng/table';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MultiSelectModule } from 'primeng/multiselect';
@@ -12,6 +12,7 @@ import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
 import { EmployeesDialogComponent } from "../employees-dialog/employees-dialog.component";
 import { AvatarModule } from 'primeng/avatar';
+import { StorageService } from '../../services/storage.service';
 
 @Component({
     selector: 'app-team',
@@ -25,18 +26,22 @@ export class TeamComponent {
   teamID: string | null = '';
   teamEmployees: EmployeePositionTeamResponse [] = [];
   loading: boolean = true;
-  departments!: any[];
-  team?: Team;
+  departments!: Department[];
+  team?: TeamDepartmentResponse;
+  user?: AccountEmployeeResponse;
 
   @ViewChild('dt1') dt1!: Table;
 
   constructor(
     private activatedRoute: ActivatedRoute,
     private teamApi: TeamApi,
-    private employeeApi: EmployeeApi
+    private employeeApi: EmployeeApi,
+    private storageService: StorageService,
+    private departmentApi: DepartmentApi
   ){}
 
   ngOnInit(){
+    this.user = this.storageService.get('user');
     this.teamID = this.activatedRoute.snapshot.paramMap.get('id');
     this.getTeam();
     this.getEmployees();
@@ -46,7 +51,7 @@ export class TeamComponent {
     this.employeeApi.apiEmployeeByTeamTeamIdGet({teamId:Number(this.teamID)}).subscribe((employees) => {
       if(employees){
         this.teamEmployees=employees;
-        this.departments = this.getUniqueDepartments(employees);
+        this.getUniqueDepartments();
         this.loading = false;
       }
   });
@@ -71,14 +76,10 @@ onInputChange(event: Event, table : Table) {
   }
 }
 
-private getUniqueDepartments(employees: EmployeePositionTeamResponse[]): string[] {
-  const departmentSet = new Set<string>();
-  employees.forEach((employee) => {
-    if(employee.department){
-      departmentSet.add(employee.department);
-    }
-  });
-  return Array.from(departmentSet);
+private getUniqueDepartments() {
+  this.departmentApi.apiDepartmentGet().subscribe(result=>{
+    this.departments=result;
+  })
 }
 
 

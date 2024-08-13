@@ -7,7 +7,12 @@
     </div>
     <div class="avatar">
       <p-button (click)="op.toggle($event)">
-        <p-avatar image="https://primefaces.org/cdn/primeng/images/demo/avatar/amyelsner.png" styleClass="mr-2" shape="circle"></p-avatar>
+        @if(user?.photo?.uri){
+        <p-avatar [image]="user?.photo?.uri ?? undefined" styleClass="mr-2" shape="circle"></p-avatar>
+        }
+        @else{
+          <p-avatar shape="circle" icon="pi pi-user" />
+        }
         <i class="pi pi-arrow-down"></i>
       </p-button>
     </div>
@@ -16,7 +21,7 @@
 
 <p-overlayPanel #op>
   <div class="flex flex-column">
-    <span class="border-bottom-1 gap-2 justify-content-center flex align-items-center m-2" > Marcin Najman </span>
+    <span class="border-bottom-1 gap-2 justify-content-center flex align-items-center m-2" > {{user?.firstName}} {{user?.lastName}} </span>
     <p-button label="Logout" class="flex align-items-center justify-content-center" (onClick)="logout()"></p-button>
   </div>
 </p-overlayPanel>

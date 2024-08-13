@@ -29,7 +29,7 @@ export interface EmployeePositionTeamResponse {
     teamID?: number;
     teamName?: string | null;
     teamDescription?: string | null;
-    department?: string | null;
+    departmentName?: string | null;
     photo?: FileResponse;
 }
 

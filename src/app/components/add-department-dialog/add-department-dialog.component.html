@@ -1,0 +1,9 @@
+<p-button icon="pi pi-plus" (click)="showDialog()" class="ml-auto" label="Add new" [raised]="true"/>
+    <p-dialog header="Add new department" [modal]="true" [(visible)]="visible" class="w-auto">
+        <label for="firstName" class="form-label fw-bold">Department Name: </label>
+        <input type="text" [(ngModel)]="department.name" pInputText>
+        <div class="flex justify-content-end gap-2 mt-4">
+            <p-button label="Cancel" severity="secondary" (click)="visible = false" />
+            <p-button label="Save" (click)="addNewDepartment()" />
+        </div>
+</p-dialog>

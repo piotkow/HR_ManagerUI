@@ -64,7 +64,7 @@ export class UploadComponent {
   }
 
   showSuccess() {
-    this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Message Content' });
+    this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Document Uploaded Successfully' });
   }
 
   showError() {

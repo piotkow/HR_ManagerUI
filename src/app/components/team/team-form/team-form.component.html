@@ -1,1 +1,21 @@
-<p>team-form works!</p>
+<p-button icon="pi pi-plus" (click)="showDialog()" class="ml-auto" label="Add new" [raised]="true" />
+<p-dialog header="Add new team" [modal]="true" [(visible)]="visible" class="w-auto">
+    <div class="flex flex-column">
+        <div class="Name mb-3 field-grid">
+        <p-dropdown [options]="departments" optionLabel="name" [(ngModel)]="department" placeholder="Select a department"
+        id="accountType"></p-dropdown> 
+        </div>
+        <div class="Name mb-3 field-grid">
+            <label for="firstName" class="form-label fw-bold">Team Name: </label>
+            <input type="text" [(ngModel)]="teamName" class="p-2 w-full mt-2" pInputText>
+        </div>
+        <div class="Description mb-3 field-grid">
+            <label for="firstName" class="form-label fw-bold">Team Description: </label>
+            <input type="text" class="p-2 w-full mt-2" [(ngModel)]="teamDescription" pInputText>
+        </div>
+    </div>
+    <div class="flex justify-content-end gap-2 mt-4">
+        <p-button label="Cancel" severity="secondary" (click)="visible = false" />
+        <p-button label="Save" (click)="addNewTeam()" />
+    </div>
+</p-dialog>

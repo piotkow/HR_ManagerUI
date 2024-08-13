@@ -28,13 +28,14 @@ export class SidebarComponent {
       { label: 'Dashboard', icon: 'pi pi-home', routerLink: this.user.accountType=='Employee' ? 'employee-dashboard' : 'hr-dashboard'},
       { label: 'Employees', icon: 'pi pi-fw pi-user', routerLink: 'employee-list' },
       { label: 'Teams', icon: 'pi pi-fw pi-users', routerLink: 'team-list' },
-      { label: 'Settings', icon: 'pi pi-fw pi-cog' },
-      { label: 'Calendar', icon: 'pi pi-calendar', routerLink: 'employee-dashboard'}
+      { label: 'Settings', icon: 'pi pi-fw pi-cog',routerLink: 'settings' },
+      { label: 'Calendar', icon: 'pi pi-calendar', routerLink: 'employee-dashboard'},
+      { label: 'Profile', icon: 'pi pi-user', routerLink: ['employee/'+this.user.employeeID]}
     ];
 
     
     if (this.user.accountType === 'Employee') {
-      this.items = this.items.filter(item => item.label !== 'Employees');
+      this.items = this.items.filter(item => item.label !== 'Employees' && item.label !== 'Settings' && item.label !== 'Calendar');
     }
 
   }

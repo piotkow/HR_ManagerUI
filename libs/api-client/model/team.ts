@@ -9,14 +9,16 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
+import { Department } from './department';
 import { Employee } from './employee';
 
 
 export interface Team { 
     teamID?: number;
     teamName: string;
-    department: string;
+    departmentID?: number;
     teamDescription?: string | null;
     employees?: Array<Employee> | null;
+    department?: Department;
 }
 

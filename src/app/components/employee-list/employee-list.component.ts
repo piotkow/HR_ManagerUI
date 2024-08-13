@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { EmployeeApi, EmployeePositionTeamResponse } from '../../../../libs/api-client';
+import { Department, DepartmentApi, EmployeeApi, EmployeePositionTeamResponse } from '../../../../libs/api-client';
 import { TableModule, Table } from 'primeng/table';
 import { MultiSelectModule } from 'primeng/multiselect';
 import { FormsModule } from '@angular/forms';
@@ -34,12 +34,13 @@ export class EmployeeListComponent {
     loading: boolean = true;
 
     activityValues: number[] = [0, 100];
-    departments!: any[];
+    departments!: Department[];
     showEmployeeCard: boolean = false;
 
     constructor(
       private employeeApi : EmployeeApi,
-      private router : Router
+      private router : Router,
+      private departmentApi: DepartmentApi
       ) {}
 
     ngOnInit() {
@@ -56,15 +57,11 @@ export class EmployeeListComponent {
       }
     }
 
-    private getUniqueDepartments(employees: EmployeePositionTeamResponse[]): string[] {
-      const departmentSet = new Set<string>();
-      employees.forEach((employee) => {
-        if(employee.department){
-          departmentSet.add(employee.department);
-        }
-      });
-      return Array.from(departmentSet);
-  }
+    private getUniqueDepartments() {
+      this.departmentApi.apiDepartmentGet().subscribe(result=>{
+        this.departments=result;
+      })
+    }
 
     clear(table: Table) {
         table.clear();
@@ -73,8 +70,9 @@ export class EmployeeListComponent {
     getAllEmployees(){
       this.employeeApi.apiEmployeeGet().subscribe((employees) => {
         this.employees = employees;
-        this.departments = this.getUniqueDepartments(employees);
+        this.getUniqueDepartments();
         this.loading = false;
+        console.log("employes", employees);
     });
     }
 

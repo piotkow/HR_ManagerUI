@@ -60,11 +60,6 @@ export class EmployeeComponent {
     this.employeeID = this.activatedRoute.snapshot.paramMap.get('id');
     this.getEmployee();
     this.getDocuments();
-    this.subscription.add(this.refreshDataService.refreshSubject.subscribe((index) => {
-      if (index === 'employee-update-succeed') {
-        this.showSuccess();
-      }
-    }))
   }
 
   getEmployee(){

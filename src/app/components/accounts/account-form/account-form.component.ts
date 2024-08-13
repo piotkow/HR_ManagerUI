@@ -203,7 +203,7 @@ export class AccountFormComponent {
           next:(result)=>{
 
             this.router.navigateByUrl('/employee/'+this.employeeId);
-            this.refreshService.refresh('employee-update-succeed');
+            this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Employee edited successfully' });
           },
           error: (err)=>{
             console.log('Employee edit error:',err);

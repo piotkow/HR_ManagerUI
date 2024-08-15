@@ -2,8 +2,9 @@ import { Injectable, inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { StorageService } from './storage.service';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, Observable, Subscription } from 'rxjs';
 import { AccountApi, AccountEmployeeResponse } from '../../../libs/api-client';
+import { RefreshDataService } from './refresh-data.service';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +15,9 @@ export class AuthService {
   private storageService = inject(StorageService)
   private loggedInSubject = new BehaviorSubject<boolean>(this.storageService.get('isLoggedIn') || false);
   private accountApi = inject (AccountApi);
+  private subscription: Subscription = new Subscription();
 
+  constructor(private refreshDataService: RefreshDataService){}
 
   login(result: { [key: string]: any }): void {
     const decodedToken = this.jwtHelperService.decodeToken(result['token']);

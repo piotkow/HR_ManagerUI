@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { ActivatedRoute, RouterLink, RouterModule } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink, RouterModule } from '@angular/router';
 import { AccountEmployeeResponse, Department, DepartmentApi, EmployeeApi, EmployeePositionTeamResponse, Team, TeamApi, TeamDepartmentResponse } from '../../../../libs/api-client';
 import { Table, TableModule } from 'primeng/table';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -13,13 +13,15 @@ import { InputTextModule } from 'primeng/inputtext';
 import { EmployeesDialogComponent } from "../employees-dialog/employees-dialog.component";
 import { AvatarModule } from 'primeng/avatar';
 import { StorageService } from '../../services/storage.service';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { ConfirmationService, MessageService } from 'primeng/api';
 
 @Component({
     selector: 'app-team',
     standalone: true,
     templateUrl: './team.component.html',
     styleUrl: './team.component.css',
-    imports: [TableModule, MultiSelectModule, FormsModule, ReactiveFormsModule, TagModule, ProgressBarModule, CommonModule, DropdownModule, ButtonModule, InputTextModule, RouterLink, RouterModule, EmployeesDialogComponent, AvatarModule]
+    imports: [TableModule,ConfirmDialogModule, MultiSelectModule, FormsModule, ReactiveFormsModule, TagModule, ProgressBarModule, CommonModule, DropdownModule, ButtonModule, InputTextModule, RouterLink, RouterModule, EmployeesDialogComponent, AvatarModule]
 })
 export class TeamComponent {
 
@@ -37,7 +39,10 @@ export class TeamComponent {
     private teamApi: TeamApi,
     private employeeApi: EmployeeApi,
     private storageService: StorageService,
-    private departmentApi: DepartmentApi
+    private departmentApi: DepartmentApi,
+    private messageService: MessageService,
+    private confirmationService: ConfirmationService,
+    private router: Router
   ){}
 
   ngOnInit(){
@@ -82,5 +87,36 @@ private getUniqueDepartments() {
   })
 }
 
+deleteTeam(teamId: number | undefined) {
+  if(teamId)
+  this.teamApi.apiTeamIdDelete({ id: Number(teamId) }).subscribe({
+    next: (res) => {
+      this.router.navigateByUrl('team-list');
+      this.messageService.add({ severity: 'success', summary: 'Confirmed', detail: 'Record deleted' });
+    },
+    error: (err)=>{
+      console.log("error while delete team:", err);
+    }
+  })
+}
+
+confirmDialog(teamId: number | undefined) {
+  this.confirmationService.confirm({
+    message: 'Do you want to delete this record?',
+    header: 'Delete Confirmation',
+    icon: 'pi pi-info-circle',
+    acceptButtonStyleClass: "p-button-danger p-button-text",
+    rejectButtonStyleClass: "p-button-text p-button-text",
+    acceptIcon: "none",
+    rejectIcon: "none",
+
+    accept: () => {
+      this.deleteTeam(teamId);
+    },
+    reject: () => {
+      this.messageService.add({ severity: 'error', summary: 'Rejected', detail: 'You have rejected' });
+    }
+  });
+}
 
 }

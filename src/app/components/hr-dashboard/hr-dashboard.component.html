@@ -1,5 +1,6 @@
 <!-- <p-tabView>
   <p-tabPanel header="Header I"> -->
+
 <div class="grid p-3">
   <div class="col-4">
     <h3>Pending: </h3>
@@ -9,8 +10,10 @@
     <div class="cards h-30rem mt-3" dragHandle=".p-panel-header" pDroppable (onDrop)="dropOnPending()">
       @for (item of pendingAbsences; track $index) {
       @if(item.firstName){
-      <p-panel [header]="item.firstName+' '+item.lastName">
-        <p-card [header]="(item.startDate | date) +' - '+(item.endDate | date)" subheader="Absence Request" pDraggable (onDragStart)="dragStart(item)" (onDragEnd)="dragEnd()">
+      <p-panel [header]="item.firstName+' '+item.lastName +' | '+ item.teamName">
+        <p-card class="cursor-pointer" (click)="showTeamCalendar($event, item.teamId)"
+          [header]="(item.startDate | date) +' - '+(item.endDate | date)" subheader="Absence Request" pDraggable
+          (onDragStart)="dragStart(item)" (onDragEnd)="dragEnd()">
           <ng-template pTemplate="header">
           </ng-template>
           <ng-template pTemplate="content">
@@ -25,6 +28,7 @@
                 (onClick)="changeAbsenceStatus(item.absenceId, 'Rejected')"></p-button>
             </div>
           </ng-template>
+          <p-confirmPopup />
         </p-card>
       </p-panel>
       }
@@ -44,8 +48,9 @@
     <div class="cards h-30rem mt-3" dragHandle=".p-panel-header" pDroppable (onDrop)="dropOnApprove()">
       @for (item of approvedAbsences; track $index) {
       @if(item.firstName){
-      <p-panel [header]="item.firstName+' '+item.lastName">
-        <p-card [header]="(item.startDate | date) +' - '+(item.endDate | date)" subheader="Absence Request" pDraggable (onDragStart)="dragStart(item)" (onDragEnd)="dragEnd()">
+      <p-panel [header]="item.firstName+' '+item.lastName+' | '+ item.teamName">
+        <p-card class="cursor-pointer" [header]="(item.startDate | date) +' - '+(item.endDate | date)"
+          subheader="Absence Request" pDraggable (onDragStart)="dragStart(item)" (onDragEnd)="dragEnd()">
           <p-tag [value]="item.status" severity="success"></p-tag>
           <ng-template pTemplate="header">
           </ng-template>
@@ -71,8 +76,9 @@
     <div class="cards h-30rem mt-3" dragHandle=".p-panel-header" pDroppable (onDrop)="dropOnReject()">
       @for (item of rejectedAbsences; track $index) {
       @if(item.firstName){
-      <p-panel [header]="item.firstName+' '+item.lastName">
-        <p-card [header]="(item.startDate | date) +' - '+(item.endDate | date)" subheader="Absence Request" pDraggable (onDragStart)="dragStart(item)" (onDragEnd)="dragEnd()">
+      <p-panel [header]="item.firstName+' '+item.lastName+' | '+ item.teamName">
+        <p-card class="cursor-pointer" [header]="(item.startDate | date) +' - '+(item.endDate | date)"
+          subheader="Absence Request" pDraggable (onDragStart)="dragStart(item)" (onDragEnd)="dragEnd()">
           <p-tag [value]="item.status" severity="danger"></p-tag>
           <ng-template pTemplate="header">
           </ng-template>
@@ -91,8 +97,12 @@
     </div>
   </div>
 </div>
+@if(calendarDialogVisible){
+<app-calendar-dialog [visible]="true" [teamIdToShowOnDialog]="teamIdToShowOnDialog"></app-calendar-dialog>
+}
+
 <!-- </p-tabPanel>
-  <p-tabPanel header="Header II"> -->
-<!-- <app-employee-dashboard></app-employee-dashboard> -->
-<!-- </p-tabPanel>
+  <p-tabPanel header="Header II">
+<app-employee-dashboard></app-employee-dashboard>
+</p-tabPanel>
 </p-tabView> -->

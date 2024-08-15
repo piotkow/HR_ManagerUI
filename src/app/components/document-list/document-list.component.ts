@@ -47,7 +47,8 @@ export class DocumentListComponent {
   }
 
   deleteDocument(documentId: number) {
-    this.documentApi.apiDocumentIdDelete({ id: documentId }).subscribe({
+    if(this.employeeID)
+    this.documentApi.apiDocumentIdEmployeeIdDelete({ id: documentId, employeeId: Number(this.employeeID) }).subscribe({
       next: (res) => {
         console.log(" doc id: ", documentId)
 ;        this.refreshDataService.refresh('document-list');

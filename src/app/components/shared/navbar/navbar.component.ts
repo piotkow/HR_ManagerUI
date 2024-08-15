@@ -8,7 +8,7 @@ import { ToggleButtonModule } from 'primeng/togglebutton'
 import { Router } from '@angular/router';
 import { AuthService } from '../../../services/auth.service';
 import { StorageService } from '../../../services/storage.service';
-import { AccountEmployeeResponse } from '../../../../../libs/api-client';
+import { AccountApi, AccountEmployeeResponse, EmployeeApi, EmployeePositionTeamResponse } from '../../../../../libs/api-client';
 import { Subscription } from 'rxjs';
 import { RefreshDataService } from '../../../services/refresh-data.service';
 
@@ -24,7 +24,8 @@ export class NavbarComponent {
     private router: Router,
     private authService: AuthService,
     private storageService: StorageService,
-    private refreshDataService: RefreshDataService
+    private refreshDataService: RefreshDataService,
+    private accountApi: AccountApi
   ){}
   items: MenuItem[] | undefined;
   activeItem: MenuItem | undefined;
@@ -35,7 +36,7 @@ export class NavbarComponent {
     this.user = this.storageService.get('user');
     this.subscription.add(this.refreshDataService.refreshSubject.subscribe((index) => {
       if (index === 'logged-user') {
-        this.user = this.storageService.get('user');
+        this.updateLoggedUser()
       }
     }))
       this.items = [
@@ -46,6 +47,12 @@ export class NavbarComponent {
       ];
 
       this.activeItem = this.items[0];
+  }
+
+  updateLoggedUser(){
+    this.accountApi.apiAccountIdGet({id: Number(this.user?.accountID)}).subscribe(result=>{
+      this.user=result;
+    })
   }
 
   logout(){

@@ -244,7 +244,8 @@ export class AccountFormComponent {
     console.log("dodanie nowego");
     console.log("id:", this.employeeId);
     for (let file of event.files) {
-      this.photoApi.apiPhotoUploadPhotoPost({ photo: file }).subscribe({
+      if(this.employeeId)
+      this.photoApi.apiPhotoUploadPhotoEmployeeIdPost({ photo: file, employeeId: Number(this.employeeId) }).subscribe({
         next: (result) => {
           console.log("blob z azure: ", result);
           var newPhoto: PhotoRequest = {
@@ -279,8 +280,8 @@ export class AccountFormComponent {
     console.log("edit zdj");
     console.log("id zdjecia",this.employeeDetails?.photo);
     for (let file of event.files){
-      if(this.employeeDetails?.photo?.fileID){
-    this.photoApi.apiPhotoIdPut({id: this.employeeDetails?.photo?.fileID, photo: file}).subscribe({
+      if(this.employeeDetails?.photo?.fileID && this.employeeId){
+    this.photoApi.apiPhotoIdEmployeeIdPut({id: this.employeeDetails?.photo?.fileID, photo: file, employeeId: Number(this.employeeId)}).subscribe({
       next:(res)=>{
         this.router.navigateByUrl('/employee/'+this.employeeId);
         this.showSuccess();

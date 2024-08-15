@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Account, AccountApi, EmployeeApi, EmployeePositionTeamResponse, Position, PositionApi } from '../../../../../libs/api-client';
+import { Account, AccountApi, EmployeeApi, EmployeePositionTeamResponse, PhotoApi, Position, PositionApi } from '../../../../../libs/api-client';
 import Swal from 'sweetalert2';
 import { CommonModule } from '@angular/common';
 import { InputTextModule } from 'primeng/inputtext';
@@ -32,7 +32,8 @@ export class EmployeeFormComponent {
     private router: Router,
     private employeeApi: EmployeeApi,
     private positionApi: PositionApi,
-    private accountApi: AccountApi
+    private accountApi: AccountApi,
+    private photoApi: PhotoApi
 
   ) { }
 
@@ -107,8 +108,8 @@ export class EmployeeFormComponent {
     const fileUpload = event.target.files[0];
     console.log('File upload: ', fileUpload);
 
-    if (fileUpload) {
-      this.employeeApi.apiEmployeeUploadPhotoPost(fileUpload).subscribe((result: any) => {
+    if (fileUpload && this.employeeId) {
+      this.photoApi.apiPhotoUploadPhotoEmployeeIdPost({photo: fileUpload, employeeId: Number(this.employeeId)}).subscribe((result: any) => {
         console.log('Uploaded file: ', result);
         if (result) {
           this.uploadedFileUrl = result.secureUrl;

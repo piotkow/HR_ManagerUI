@@ -32,8 +32,9 @@ export interface ApiDocumentByEmployeeEmployeeIdGetRequestParams {
     employeeId: number;
 }
 
-export interface ApiDocumentIdDeleteRequestParams {
+export interface ApiDocumentIdEmployeeIdDeleteRequestParams {
     id: number;
+    employeeId: number;
 }
 
 export interface ApiDocumentIdGetRequestParams {
@@ -49,7 +50,8 @@ export interface ApiDocumentPostRequestParams {
     documentRequest?: DocumentRequest;
 }
 
-export interface ApiDocumentUploadDocumentPostRequestParams {
+export interface ApiDocumentUploadDocumentEmployeeIdPostRequestParams {
+    employeeId: number;
     document?: Blob;
 }
 
@@ -277,13 +279,17 @@ export class DocumentApi {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public apiDocumentIdDelete(requestParameters: ApiDocumentIdDeleteRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext, transferCache?: boolean}): Observable<any>;
-    public apiDocumentIdDelete(requestParameters: ApiDocumentIdDeleteRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext, transferCache?: boolean}): Observable<HttpResponse<any>>;
-    public apiDocumentIdDelete(requestParameters: ApiDocumentIdDeleteRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext, transferCache?: boolean}): Observable<HttpEvent<any>>;
-    public apiDocumentIdDelete(requestParameters: ApiDocumentIdDeleteRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext, transferCache?: boolean}): Observable<any> {
+    public apiDocumentIdEmployeeIdDelete(requestParameters: ApiDocumentIdEmployeeIdDeleteRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext, transferCache?: boolean}): Observable<any>;
+    public apiDocumentIdEmployeeIdDelete(requestParameters: ApiDocumentIdEmployeeIdDeleteRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext, transferCache?: boolean}): Observable<HttpResponse<any>>;
+    public apiDocumentIdEmployeeIdDelete(requestParameters: ApiDocumentIdEmployeeIdDeleteRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext, transferCache?: boolean}): Observable<HttpEvent<any>>;
+    public apiDocumentIdEmployeeIdDelete(requestParameters: ApiDocumentIdEmployeeIdDeleteRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext, transferCache?: boolean}): Observable<any> {
         const id = requestParameters.id;
         if (id === null || id === undefined) {
-            throw new Error('Required parameter id was null or undefined when calling apiDocumentIdDelete.');
+            throw new Error('Required parameter id was null or undefined when calling apiDocumentIdEmployeeIdDelete.');
+        }
+        const employeeId = requestParameters.employeeId;
+        if (employeeId === null || employeeId === undefined) {
+            throw new Error('Required parameter employeeId was null or undefined when calling apiDocumentIdEmployeeIdDelete.');
         }
 
         let localVarHeaders = this.defaultHeaders;
@@ -328,7 +334,7 @@ export class DocumentApi {
             }
         }
 
-        let localVarPath = `/api/Document/${this.configuration.encodeParam({name: "id", value: id, in: "path", style: "simple", explode: false, dataType: "number", dataFormat: "int32"})}`;
+        let localVarPath = `/api/Document/${this.configuration.encodeParam({name: "id", value: id, in: "path", style: "simple", explode: false, dataType: "number", dataFormat: "int32"})}/${this.configuration.encodeParam({name: "employeeId", value: employeeId, in: "path", style: "simple", explode: false, dataType: "number", dataFormat: "int32"})}`;
         return this.httpClient.request<any>('delete', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
@@ -582,10 +588,14 @@ export class DocumentApi {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public apiDocumentUploadDocumentPost(requestParameters: ApiDocumentUploadDocumentPostRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext, transferCache?: boolean}): Observable<any>;
-    public apiDocumentUploadDocumentPost(requestParameters: ApiDocumentUploadDocumentPostRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext, transferCache?: boolean}): Observable<HttpResponse<any>>;
-    public apiDocumentUploadDocumentPost(requestParameters: ApiDocumentUploadDocumentPostRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext, transferCache?: boolean}): Observable<HttpEvent<any>>;
-    public apiDocumentUploadDocumentPost(requestParameters: ApiDocumentUploadDocumentPostRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext, transferCache?: boolean}): Observable<any> {
+    public apiDocumentUploadDocumentEmployeeIdPost(requestParameters: ApiDocumentUploadDocumentEmployeeIdPostRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext, transferCache?: boolean}): Observable<any>;
+    public apiDocumentUploadDocumentEmployeeIdPost(requestParameters: ApiDocumentUploadDocumentEmployeeIdPostRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext, transferCache?: boolean}): Observable<HttpResponse<any>>;
+    public apiDocumentUploadDocumentEmployeeIdPost(requestParameters: ApiDocumentUploadDocumentEmployeeIdPostRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext, transferCache?: boolean}): Observable<HttpEvent<any>>;
+    public apiDocumentUploadDocumentEmployeeIdPost(requestParameters: ApiDocumentUploadDocumentEmployeeIdPostRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext, transferCache?: boolean}): Observable<any> {
+        const employeeId = requestParameters.employeeId;
+        if (employeeId === null || employeeId === undefined) {
+            throw new Error('Required parameter employeeId was null or undefined when calling apiDocumentUploadDocumentEmployeeIdPost.');
+        }
         const document = requestParameters.document;
 
         let localVarHeaders = this.defaultHeaders;
@@ -652,7 +662,7 @@ export class DocumentApi {
             }
         }
 
-        let localVarPath = `/api/Document/upload-document`;
+        let localVarPath = `/api/Document/upload-document/${this.configuration.encodeParam({name: "employeeId", value: employeeId, in: "path", style: "simple", explode: false, dataType: "number", dataFormat: "int32"})}`;
         return this.httpClient.request<any>('post', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,

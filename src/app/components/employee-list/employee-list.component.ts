@@ -13,6 +13,7 @@ import { InputTextModule } from 'primeng/inputtext';
 import { RouterLink } from '@angular/router';
 import { RouterModule, Router } from '@angular/router';
 import { AvatarModule } from 'primeng/avatar';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
 // import { url } from 'inspector';
 
 
@@ -20,7 +21,7 @@ import { AvatarModule } from 'primeng/avatar';
 @Component({
   selector: 'app-employee-list',
   standalone: true,
-  imports: [TableModule, MultiSelectModule, FormsModule, ReactiveFormsModule, TagModule, ProgressBarModule, CommonModule, DropdownModule , ButtonModule, InputTextModule, RouterLink, RouterModule, AvatarModule],
+  imports: [TableModule, MultiSelectModule, FormsModule, ReactiveFormsModule, TagModule, ProgressBarModule, CommonModule, DropdownModule , ButtonModule, InputTextModule, RouterLink, RouterModule, AvatarModule, ConfirmDialogModule],
   templateUrl: './employee-list.component.html',
   styleUrl: './employee-list.component.css'
 })

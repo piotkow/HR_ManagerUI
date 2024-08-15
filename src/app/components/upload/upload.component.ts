@@ -32,7 +32,8 @@ export class UploadComponent {
   onUpload(event: FileUploadEvent) {
     console.log("id:", this.employeeID);
     for (let file of event.files) {
-      this.documentApi.apiDocumentUploadDocumentPost({ document: file }).subscribe({
+      if(this.employeeID)
+      this.documentApi.apiDocumentUploadDocumentEmployeeIdPost({document: file, employeeId: Number(this.employeeID)}).subscribe({
         next: (result) => {
           console.log("blob z azure: ", result);
           var newDocument: DocumentRequest = {

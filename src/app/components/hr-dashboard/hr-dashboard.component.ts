@@ -12,11 +12,14 @@ import { RefreshDataService } from '../../services/refresh-data.service';
 import { DragDropModule } from 'primeng/dragdrop';
 import { PanelModule } from 'primeng/panel';
 import { CommonModule } from '@angular/common';
+import { ConfirmPopupModule } from 'primeng/confirmpopup';
+import { ConfirmationService, MessageService } from 'primeng/api';
+import { CalendarDialogComponent } from "../calendar-dialog/calendar-dialog.component";
 
 @Component({
   selector: 'app-hr-dashboard',
   standalone: true,
-  imports: [ButtonModule, CardModule, TagModule, TabViewModule, EmployeeDashboardComponent, DragDropModule, PanelModule, CommonModule],
+  imports: [ButtonModule, CardModule, TagModule, TabViewModule, EmployeeDashboardComponent, DragDropModule, PanelModule, CommonModule, ConfirmPopupModule, CalendarDialogComponent],
   templateUrl: './hr-dashboard.component.html',
   styleUrl: './hr-dashboard.component.css'
 })
@@ -29,10 +32,14 @@ export class HrDashboardComponent {
   private subscription: Subscription = new Subscription();
   status = Status;
   draggedAbsence: AbsencesEmployeeResponse | undefined | null;
+  calendarDialogVisible: boolean= false;
+  teamIdToShowOnDialog?: number;
 
   constructor(
     private absenceApi: AbsenceApi,
-    private refreshDataService: RefreshDataService
+    private refreshDataService: RefreshDataService,
+    private confirmationService: ConfirmationService,
+    private messageService: MessageService
   ) { }
 
   ngOnInit() {
@@ -42,7 +49,14 @@ export class HrDashboardComponent {
         this.getAllAbsences();
       }
     }))
+    this.subscription.add(this.refreshDataService.refreshSubject.subscribe((index) => {
+      if (index === 'hide-calendar-dialog') {
+        this.calendarDialogVisible=false;
+      }
+    }))
   }
+
+
 
   getAllAbsences() {
     this.absenceApi.apiAbsenceGet().subscribe((result: any) => {
@@ -53,6 +67,11 @@ export class HrDashboardComponent {
         this.rejectedAbsences = this.absencesList.filter(item => item.status?.toString() === "Rejected")
       }
     })
+  }
+
+  onButtonClick(event: Event, absenceId: number | undefined, status: string) {
+    this.changeAbsenceStatus(absenceId, status);
+    event.stopPropagation();
   }
 
   changeAbsenceStatus(absenceId: number | undefined, status: string) {
@@ -77,16 +96,33 @@ export class HrDashboardComponent {
     this.draggedAbsence = null;
   }
 
-  dropOnApprove(){
+  dropOnApprove() {
     this.changeAbsenceStatus(this.draggedAbsence?.absenceId, 'Approved')
   }
 
-  dropOnReject(){
+  dropOnReject() {
     this.changeAbsenceStatus(this.draggedAbsence?.absenceId, 'Rejected')
   }
 
-  dropOnPending(){
+  dropOnPending() {
     this.changeAbsenceStatus(this.draggedAbsence?.absenceId, 'Pending')
+  }
+
+  showTeamCalendar(event: Event, teamId: number | undefined) {
+    this.confirmationService.confirm({
+      target: event.target as EventTarget,
+      message: 'Open Team Calendar?',
+      icon: 'pi pi-exclamation-triangle',
+      accept: () => {
+        this.teamIdToShowOnDialog= teamId;
+        this.calendarDialogVisible=true;
+        setTimeout(()=>{
+          this.refreshDataService.refresh('init-calendar');
+          // this.refreshDataService.refresh('show-calendar-dialog');
+        },200);
+      },
+      reject: () => { }
+    });
   }
 
 }

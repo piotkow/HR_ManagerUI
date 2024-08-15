@@ -1,4 +1,5 @@
 <div class="container flex flex-row overflow-hidden justify-content-center">
+    <p-confirmDialog />
     <p-table class="card w-full" #dt1 [value]="employees" dataKey="id" [rows]="10" [showCurrentPageReport]="true"
         [rowsPerPageOptions]="[10, 25, 50]" [loading]="loading" [paginator]="true"
         currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"

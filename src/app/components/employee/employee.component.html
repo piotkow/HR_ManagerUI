@@ -4,7 +4,12 @@
     <p-card>
       <div class="flex container-fluid h-full w-full">
         <div class="col-2 border-round-lg w-2">
+          @if(employee?.photo?.uri){
           <p-image src="{{employee?.photo?.uri}}" alt="Image" width="100%" height="100%" [preview]="true"></p-image>
+          }
+          @else {
+            <p-avatar shape="circle" icon="pi pi-user" />
+          }
         </div>
         <div class="flex flex-column h-full w-full">
           <div class="align-items-center justify-content-center text-3xl font-normal">

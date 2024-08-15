@@ -24,3 +24,13 @@
 ::ng-deep p-card .p-card-content{
     padding: 0;
 }
+
+::ng-deep .p-card-body:hover {
+    color: rgba(255, 255, 255, 0.87);
+    background: rgba(255, 255, 255, 0.03);
+}
+
+/* ::ng-deep .p-panel-content:hover {
+    color: rgba(255, 255, 255, 0.87);
+    background: rgba(255, 255, 255, 0);
+} */

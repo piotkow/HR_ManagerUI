@@ -1,16 +1,21 @@
 <p-button icon="pi pi-plus" (click)="showDialog()" label="Add team member" class="ml-2" />
     <p-dialog header="Add new team member" [modal]="true" [(visible)]="visible" class="w-auto">
         <span class="p-text-secondary block mb-5">Employees list:</span>
-        @for(item of employees; track $index){
+        <div class="p-inputgroup mb-3">
+            <span class="p-inputgroup-addon"><i class="pi pi-search"></i></span>
+            <input type="text" pInputText [(ngModel)]="searchTerm" placeholder="Search employees..." (ngModelChange)="onSearchChange()" />
+        </div>
+        @for(item of filteredEmployees; track $index;){
             @if (item.firstName && item.lastName && item.positionDescription) {
-            <div class="flex align-items-center gap-3 mb-3">
-                <div class="field-checkbox">
+            <div class="checkbox-card flex flex-column gap-1" [ngClass]="{ 'border-top-1 surface-border': $index!= 0 }">
+                <div class="field-checkbox mt-3">
                     <p-checkbox 
                         [(ngModel)]="selectedEmployees"
-                        [label]="item.firstName + ' ' + item.lastName + 'Email: [ ' + item.email + ' ]\n' + 'Current team: ' + item.teamName"
+                        [label]="item.firstName + ' ' + item.lastName"
                         name="group" 
                         [value]="item" />
                 </div>
+                <span class="mb-3">{{'Current team: ' + (item.teamName ? item.teamName : ' - ')}}</span>
             </div>
         }
         }

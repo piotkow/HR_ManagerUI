@@ -1,0 +1,4 @@
+::ng-deep .fc-view-harness {
+    min-height: 400px;
+    min-width: 400px;
+}

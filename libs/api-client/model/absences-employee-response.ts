@@ -16,6 +16,8 @@ export interface AbsencesEmployeeResponse {
     absenceId?: number;
     firstName?: string | null;
     lastName?: string | null;
+    teamId?: number;
+    teamName?: string | null;
     description?: string | null;
     startDate?: string;
     endDate?: string;

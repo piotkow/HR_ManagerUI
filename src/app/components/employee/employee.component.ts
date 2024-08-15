@@ -16,12 +16,13 @@ import { DocumentListComponent } from '../document-list/document-list.component'
 import { RefreshDataService } from '../../services/refresh-data.service';
 import { Subscription } from 'rxjs';
 import { StorageService } from '../../services/storage.service';
+import { AvatarModule } from 'primeng/avatar';
 
 
 @Component({
   selector: 'app-employee',
   standalone: true,
-  imports: [CardModule, ImageModule, TagModule, CommonModule, FileUploadModule, ToastModule, BadgeModule, UploadComponent, TableModule, DocumentListComponent, RouterLink],
+  imports: [CardModule, ImageModule, TagModule, CommonModule, FileUploadModule, ToastModule, BadgeModule, UploadComponent, TableModule, DocumentListComponent, RouterLink, AvatarModule],
   templateUrl: './employee.component.html',
   styleUrl: './employee.component.css'
 })

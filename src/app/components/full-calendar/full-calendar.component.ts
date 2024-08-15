@@ -7,6 +7,8 @@ import interactionPlugin, { DateClickArg } from '@fullcalendar/interaction';
 import { OverlayPanel, OverlayPanelModule } from 'primeng/overlaypanel';
 import { AbsenceApi, AbsencesEmployeeResponse, AccountEmployeeResponse } from '../../../../libs/api-client';
 import { StorageService } from '../../services/storage.service';
+import { Subscription } from 'rxjs';
+import { RefreshDataService } from '../../services/refresh-data.service';
 
 
 @Component({
@@ -20,7 +22,8 @@ export class FullCalendarComponent {
   // @ViewChild('op') overlayPanel!: OverlayPanel;
   constructor(
     private absenceApi: AbsenceApi,
-    private storageService: StorageService
+    private storageService: StorageService,
+    private refreshDataService: RefreshDataService,
   ) { }
   @Output() newItemEvent = new EventEmitter<DateSelectArg>();
   user?: AccountEmployeeResponse ;
@@ -28,11 +31,19 @@ export class FullCalendarComponent {
   absences :  AbsencesEmployeeResponse[]= [];
   events : {title: string, start: string, end: string}[]= [{title: 'Piotr Kowalczyk', start: '2024-08-07T00:00:00', end: '2024-08-16T00:00:00'}];
   calendarOptions!: CalendarOptions;
+  private subscription: Subscription = new Subscription();
+  @Input() teamIdToShowOnDialog?: number;
 
   ngOnInit(){
     this.updateCalendar();
+    console.log("teamId", this.teamIdToShowOnDialog);
     this.user = this.storageService.get('user');
     console.log("user",this.user);
+    this.subscription.add(this.refreshDataService.refreshSubject.subscribe((index) => {
+      if (index === 'init-calendar') {
+        this.updateCalendar();
+      }
+    }))
   }
 
 
@@ -42,7 +53,7 @@ export class FullCalendarComponent {
       plugins: [dayGridPlugin, interactionPlugin],
       selectable: true,
       select: (arg) => this.handleDateClick(arg),
-      events:(info,successCallback, failureCallback) => {this.getTeamAbsences(this.user?.teamID, successCallback)},
+      events:(info,successCallback, failureCallback) => {this.getTeamAbsences( this.teamIdToShowOnDialog ? this.teamIdToShowOnDialog : this.user?.teamID, successCallback)},
       headerToolbar:{
         right: 'dayGridDay,dayGridWeek,dayGridMonth',
         center: 'title',

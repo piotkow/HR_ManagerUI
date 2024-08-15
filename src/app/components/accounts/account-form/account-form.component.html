@@ -12,7 +12,8 @@
                             <p-dropdown [options]="roles" formControlName="accountType" placeholder="Select a role" class="form-select" id="accountType" [ngClass]="{
                           'ng-invalid':accountEmployeeForm.controls['accountType'].invalid && accountEmployeeForm.controls['accountType'].dirty,
                           'is-valid':accountEmployeeForm.controls['accountType'].valid
-                        }">
+                        }"
+                        [readonly]="loggedUser?.accountType !== 'HR'">
                             </p-dropdown>
                             <span (click)="clearRole()" class="input-group-text">
                                 <i class="icons8-f-close"></i>
@@ -253,7 +254,7 @@
                         </div>
                     </div> -->
             
-                    @if(accountId){
+                    @if(accountId && loggedUser?.employeeID?.toString() == employeeId){
                     <p-fileUpload 
                     name="demo[]" 
                     url="https://www.primefaces.org/cdn/api/upload.php"

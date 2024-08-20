@@ -6,7 +6,9 @@
         <div class="content text-center flex flex-column">
             <p class="font-light">{{team?.teamDescription}}</p>
             <p-tag [value]="team?.departmentName ?? undefined"></p-tag>
+            @if(user?.accountType == "HR"){
             <p-button class="mt-3" icon="pi pi-trash" label="Delete team" [rounded]="true" severity="danger" [outlined]="true" [style]="{ 'margin-left': '.5em' }" (onClick)="confirmDialog(team?.teamID)"></p-button>
+            }
         </div>
     </div>
     <p-confirmDialog />

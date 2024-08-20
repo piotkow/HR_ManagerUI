@@ -14,9 +14,6 @@ import { ButtonModule } from 'primeng/button';
 })
 export class CalendarDialogComponent {
 
-
-  positionName: string="";
-  positionDescription: string="";
   private subscription: Subscription = new Subscription();
   @Input() visible: boolean = false;
   @Input() teamIdToShowOnDialog?: number;

@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { DataViewModule } from 'primeng/dataview';
-import { Team, TeamApi, TeamDepartmentResponse } from '../../../../libs/api-client';
+import { AccountEmployeeResponse, Team, TeamApi, TeamDepartmentResponse } from '../../../../libs/api-client';
 import { RatingModule } from 'primeng/rating';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
@@ -10,6 +10,7 @@ import { RouterLink } from '@angular/router';
 import { TeamFormComponent } from "../team/team-form/team-form.component";
 import { Subscription } from 'rxjs';
 import { RefreshDataService } from '../../services/refresh-data.service';
+import { StorageService } from '../../services/storage.service';
 
 
 
@@ -26,13 +27,16 @@ export class TeamListComponent {
   searchText: string = '';
   filteredabsencesList: Team[] = [];
   private subscription: Subscription = new Subscription();
+  loggedUser?: AccountEmployeeResponse;
 
   constructor(
     private teamApi : TeamApi,
-    private refreshDataService: RefreshDataService
+    private refreshDataService: RefreshDataService,
+    private storageService: StorageService
   ) { }
 
   ngOnInit(){
+    this.loggedUser = this.storageService.get('user');
     console.log("team list:", this.getAllTeams());
     this.getAllTeams();
     this.subscription.add(this.refreshDataService.refreshSubject.subscribe((index) => {

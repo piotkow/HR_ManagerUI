@@ -2,9 +2,11 @@
   <div class="flex justify-content-center flex-wrap" id="container">
     <p-dataView #dv [value]="teamList" class="card">
         <ng-template pTemplate="header">
+            @if(loggedUser?.accountType == 'HR'){
             <div class="flex justify-content-end">
                 <app-team-form></app-team-form>
             </div>
+        }
         </ng-template>
         <ng-template pTemplate="list" let-products>
             <div class="grid grid-nogutter">

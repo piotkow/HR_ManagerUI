@@ -23,9 +23,9 @@
             </p>
             <div class="flex justify-content-end align-content-end">
               <p-button label="Accept" icon="pi pi-check" severity="success"
-                (onClick)="changeAbsenceStatus(item.absenceId, 'Approved')"></p-button>
+                (onClick)="onButtonClick($event, item.absenceId, 'Approved')"></p-button>
               <p-button label="Reject" icon="pi pi-times" severity="danger" class="ml-2"
-                (onClick)="changeAbsenceStatus(item.absenceId, 'Rejected')"></p-button>
+                (onClick)="onButtonClick($event, item.absenceId, 'Rejected')"></p-button>
             </div>
           </ng-template>
           <p-confirmPopup />

@@ -27,6 +27,9 @@
               <p-button label="Reject" icon="pi pi-times" severity="danger" class="ml-2"
                 (onClick)="onButtonClick($event, item.absenceId, 'Rejected')"></p-button>
             </div>
+            <div class="flex justify-content-start align-content-start text-color-secondary">
+              Click to show {{item.teamName}} calendar
+            </div>
           </ng-template>
           <p-confirmPopup />
         </p-card>

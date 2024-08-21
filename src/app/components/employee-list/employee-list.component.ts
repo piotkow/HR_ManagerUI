@@ -29,6 +29,7 @@ export class EmployeeListComponent {
 
 
     employees!: EmployeePositionTeamResponse[];
+    transformedEmployees!: any[];
 
     statuses!: any[];
 
@@ -68,14 +69,19 @@ export class EmployeeListComponent {
         table.clear();
     }
 
-    getAllEmployees(){
-      this.employeeApi.apiEmployeeGet().subscribe((employees) => {
-        this.employees = employees;
-        this.getUniqueDepartments();
-        this.loading = false;
-        console.log("employes", employees);
-    });
-    }
+getAllEmployees() {
+  this.employeeApi.apiEmployeeGet().subscribe((employees) => {
+    this.employees = employees;
+    this.transformedEmployees = employees.map(employee => ({
+      ...employee,
+      dateOfEmployment: employee.dateOfEmployment ? new Date(employee.dateOfEmployment) : null
+    }));
+    this.getUniqueDepartments();
+    this.loading = false;
+    console.log("employees", employees);
+  });
+}
+
 
     navigateToEmployeeDetail(employeeId: number) {
       console.log("id w funckji: ", employeeId);

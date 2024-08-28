@@ -47,7 +47,6 @@ export class EmployeeListComponent {
 
     ngOnInit() {
       this.getAllEmployees();
-      console.log(this.departments);
     }
 
     @ViewChild('dt1') dt1!: Table;
@@ -78,13 +77,11 @@ getAllEmployees() {
     }));
     this.getUniqueDepartments();
     this.loading = false;
-    console.log("employees", employees);
   });
 }
 
 
     navigateToEmployeeDetail(employeeId: number) {
-      console.log("id w funckji: ", employeeId);
       this.router.navigateByUrl(`employee/${{employeeId}}`);
     }
 

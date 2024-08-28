@@ -40,9 +40,7 @@ export class TeamFormComponent {
   getDepartments(){
     this.departmentApi.apiDepartmentGet().subscribe(result=>{
       this.departments=result;
-      console.log("departments z forma:", this.departments);
       this.departments.forEach(element => {
-        console.log(element.name);
       });
     })
   }
@@ -54,7 +52,6 @@ export class TeamFormComponent {
       departmentID: this.department?.derpartmentID
     }
     this.teamApi.apiTeamPost({ teamRequest: teamReq}).subscribe(result=>{
-      console.log('result dodania position', result);
       this.refreshDataService.refresh('team-list');
       this.messageService.add({ severity: 'success', summary: 'Confirmed', detail: 'Position added successfully' });
       this.teamName="";

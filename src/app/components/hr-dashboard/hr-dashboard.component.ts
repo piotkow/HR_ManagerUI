@@ -75,12 +75,10 @@ export class HrDashboardComponent {
   }
 
   changeAbsenceStatus(absenceId: number | undefined, status: string) {
-    console.log('status', status);
     if (absenceId)
       this.absenceApi.apiAbsenceUpdateStatusIdPut({ id: absenceId, body: '"' + status + '"' }).subscribe({
         next: (result) => {
           this.getAllAbsences();
-          console.log("result", result);
         },
         error: (err) => {
           console.log(err.error);
@@ -118,7 +116,6 @@ export class HrDashboardComponent {
         this.calendarDialogVisible=true;
         setTimeout(()=>{
           this.refreshDataService.refresh('init-calendar');
-          // this.refreshDataService.refresh('show-calendar-dialog');
         },200);
       },
       reject: () => { }

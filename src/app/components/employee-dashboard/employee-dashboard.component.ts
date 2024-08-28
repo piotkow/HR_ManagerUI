@@ -60,7 +60,6 @@ export class EmployeeDashboardComponent implements OnInit {
     console.log(this.absenceForm?.value);
     this.absenceApi.apiAbsencePost({ absenceRequest: this.absenceForm?.value }).subscribe({
       next: (res) => {
-        console.log("absence: ", res);
         this.refreshDataService.refresh('absence-request-list');
       },
       error: (err) => {

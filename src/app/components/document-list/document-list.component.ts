@@ -50,7 +50,6 @@ export class DocumentListComponent {
     if(this.employeeID)
     this.documentApi.apiDocumentIdEmployeeIdDelete({ id: documentId, employeeId: Number(this.employeeID) }).subscribe({
       next: (res) => {
-        console.log(" doc id: ", documentId)
 ;        this.refreshDataService.refresh('document-list');
         this.messageService.add({ severity: 'success', summary: 'Confirmed', detail: 'Record deleted' });
       },

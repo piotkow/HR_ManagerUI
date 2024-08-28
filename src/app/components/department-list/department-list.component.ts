@@ -56,7 +56,6 @@ export class DepartmentListComponent {
   deleteDepartment(departmentId: number) {
     this.departmentApi.apiDepartmentIdDelete({ id: departmentId }).subscribe({
       next: (res) => {
-        console.log(" doc id: ", departmentId);
         this.getDepartments();
         this.messageService.add({ severity: 'info', summary: 'Confirmed', detail: 'Record deleted' });
       },

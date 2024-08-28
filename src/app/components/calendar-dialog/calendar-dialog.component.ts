@@ -23,7 +23,6 @@ export class CalendarDialogComponent {
   ) { }
   
   ngOnInit() {
-    console.log("inicjalizacja dialogu calendara");
     this.subscription.add(this.refreshDataService.refreshSubject.subscribe((index) => {
       if (index === 'show-calendar-dialog') {
         this.showDialog();
@@ -32,12 +31,10 @@ export class CalendarDialogComponent {
   }
 
   showDialog() {
-    console.log("pokazuje dialoga");
     this.visible = true;
   }
 
   hideDialog(){
-    // this.visible=false;
     this.refreshDataService.refresh('hide-calendar-dialog');
   }
 

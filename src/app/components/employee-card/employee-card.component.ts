@@ -59,7 +59,6 @@ export class EmployeeCardComponent {
     if(this.employeeID){
     this.employeeApi.apiEmployeeIdDelete({id: Number(this.employeeID)}).subscribe({
       next:(result)=>{
-        console.log("result z usuwania employee:", result);
       }
     })
     }

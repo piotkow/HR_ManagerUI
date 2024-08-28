@@ -37,7 +37,6 @@ export class LoginComponent {
   login() {
     console.log("XD");
     this.loginApi.apiLoginPost({accountLoginRequest: this.loginForm?.value}).subscribe((result : {[key : string]: any}) => {
-        console.log("Result",result);
         this.authService.login(result);
       }, (error) => {
         console.error('Login error:', error);

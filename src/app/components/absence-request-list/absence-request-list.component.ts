@@ -50,7 +50,6 @@ export class AbsenceRequestListComponent {
       this.absenceApi.apiAbsenceByEmployeeEmployeeIdGet({employeeId: this.user.employeeID}).subscribe({
         next:(res)=>{
           this.absences = res;
-          console.log("nowa lista: ", this.absences);
         },
         error: (err)=>{
         }

@@ -66,7 +66,6 @@ export class EmployeeFormComponent {
     if(this.employeeId){
     this.employeeApi.apiEmployeeIdGet({id:Number(this.employeeId)}).subscribe(user => {
       if (user) {
-        console.log('user z ktorego patchuje dane:', user);
         this.employeeForm?.patchValue(user);
         this.employeeDetails = user;
       }
@@ -75,9 +74,7 @@ export class EmployeeFormComponent {
   }
 
   saveEmployee() {
-    console.log('Values from user form: ', this.employeeForm?.value);
     this.employeeApi.apiEmployeePost({employeeRequest:this.employeeForm?.value}).subscribe(result => {
-      console.log('Add user result: ', result);
       if (result) {
 
       }
@@ -86,31 +83,24 @@ export class EmployeeFormComponent {
 
   editUser() {
     this.employeeApi.apiEmployeeIdPut({id:Number(this.employeeId)}, this.employeeForm?.value).subscribe(async result => {
-      console.log('Edit car result: ', result);
-      console.log('Request Payload: ', this.employeeForm?.value);
       if (result) {
         const { value: redirecturl } = await Swal.fire(
           'Success',
           'The user details have been updated successfully',
           'success'
         );
-        console.log('redirecturl: ', redirecturl);
-
         if (redirecturl) {
-          this.router.navigate(['/admin-dashboard']); // ZMIENIC POZNIEJ NA ACCOUNTS
+          this.router.navigate(['/admin-dashboard']);
         }
       }
     })
   }
 
   uploadAvatar(event: any) {
-    console.log('event: ', event);
     const fileUpload = event.target.files[0];
-    console.log('File upload: ', fileUpload);
 
     if (fileUpload && this.employeeId) {
       this.photoApi.apiPhotoUploadPhotoEmployeeIdPost({photo: fileUpload, employeeId: Number(this.employeeId)}).subscribe((result: any) => {
-        console.log('Uploaded file: ', result);
         if (result) {
           this.uploadedFileUrl = result.secureUrl;
           this.employeeForm?.controls['avatar'].setValue(this.uploadedFileUrl);

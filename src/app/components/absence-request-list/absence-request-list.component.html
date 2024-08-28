@@ -3,8 +3,7 @@
         <div class="grid grid-nogutter">
             <div *ngFor="let absence of absences; let first = first" class="col-12">
                 <div class="flex flex-column p-4 gap-3" [ngClass]="{ 'border-top-1 surface-border': !first }">
-                    <div class="md:w-10rem relative">
-                        <!-- <img class="block xl:block mx-auto border-round w-full" src="../../../assets/icons/pending.png" /> -->
+                    <div class="md:w-10rem relative"> 
                         <p-tag [value]="absence.status" [severity]="absence.status=='Pending' ? 'primary' : absence.status=='Approved' ? 'success' : 'danger'" [style.left.px]="4" [style.top.px]="4" />
                     </div>
                     <div class="flex flex-row justify-content-between  flex-1 gap-4">
@@ -20,7 +19,6 @@
                         <div class="flex flex-column align-items-end gap-5">
                             <span class="text-xl font-semibold text-900">{{ absence.description }}</span>
                             <div class="flex flex-row-reverse  gap-2">
-                                <!-- <p-button icon="pi pi-heart" [outlined]="true" /> -->
                                 <p-button icon="pi pi-times" [rounded]="true" [text]="true" [raised]="true" label="Cancel" severity="danger" (onClick)="confirmDialog(absence.absenceId)" [disabled]="absence.status !== 'Pending'"/>
                             </div>
                         </div>
@@ -30,5 +28,4 @@
         </div>
     </ng-template>
 </p-dataView>
-<!-- <p-toast /> -->
 <p-confirmDialog />

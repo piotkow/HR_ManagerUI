@@ -25,7 +25,6 @@ export class AuthService {
     if (decodedToken) {
       const accountId= decodedToken['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier'];
       this.accountApi.apiAccountIdGet({id:Number(accountId)}).subscribe((account)=>{
-        console.log(userObject);
         userObject=account;
         this.storageService.set('token', result['token']);
         this.storageService.set('user', userObject);

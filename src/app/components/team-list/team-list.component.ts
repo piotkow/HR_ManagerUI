@@ -37,7 +37,6 @@ export class TeamListComponent {
 
   ngOnInit(){
     this.loggedUser = this.storageService.get('user');
-    console.log("team list:", this.getAllTeams());
     this.getAllTeams();
     this.subscription.add(this.refreshDataService.refreshSubject.subscribe((index) => {
       if (index === 'team-list') {
@@ -49,7 +48,6 @@ export class TeamListComponent {
   getAllTeams(){
     this.teamApi.apiTeamGet().subscribe((result : TeamDepartmentResponse[])=>{
       if(result){
-        console.log("team list in sub: ", result);
       this.teamList=result;
       }
     })

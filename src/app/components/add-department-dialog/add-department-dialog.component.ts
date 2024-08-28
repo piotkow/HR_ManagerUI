@@ -36,7 +36,6 @@ export class AddDepartmentDialogComponent {
 
   addNewDepartment() {
     this.departmentApi.apiDepartmentPost({ departmentRequest:this.department}).subscribe(result=>{
-      console.log('result dodania department', result);
       this.refreshDataService.refresh('department-list');
       this.messageService.add({ severity: 'success', summary: 'Confirmed', detail: 'Department added successfully' });
       this.department={name:""};

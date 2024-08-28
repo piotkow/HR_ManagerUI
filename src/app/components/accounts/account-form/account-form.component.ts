@@ -67,7 +67,6 @@ export class AccountFormComponent {
 
   ngOnInit(): void {
     this.loggedUser = this.storageService.get('user');
-    // this.accountId = this.activatedRoute.snapshot.paramMap.get('id');
     this.getPositions();
     this.employeeId = this.activatedRoute.snapshot.paramMap.get('id');
     this.getEmployee();
@@ -106,8 +105,6 @@ export class AccountFormComponent {
         this.accountId=account.accountID;
         this.employeeApi.apiEmployeeIdGet({ id: Number(this.employeeId) }).subscribe(employee => {
           if (account.dateOfEmployment) {
-            console.log('acc z ktorego patchuje dane:', account);
-            console.log('emp z ktorego patchuje dane:', employee);
             this.accountEmployeeForm?.patchValue({
               accountID: account.accountID,
               employeeID: account.employeeID,
@@ -128,7 +125,6 @@ export class AccountFormComponent {
               positionID: employee.positionID
             });
             const form = this.accountEmployeeForm?.value;
-            console.log('form:', form);
             this.accountDetails = account;
             if (this.accountDetails) {
               this.selectedImage = this.accountDetails.avatar;
@@ -140,7 +136,6 @@ export class AccountFormComponent {
   }
 
   saveUser() {
-    console.log('Values from user form: ', this.accountEmployeeForm);
     const employeeRequest = {
       firstName: this.accountEmployeeForm?.get('firstName')?.value,
       lastName: this.accountEmployeeForm?.get('lastName')?.value,
@@ -155,10 +150,8 @@ export class AccountFormComponent {
       teamID: null
     };
 
-    console.log("obiekt:", employeeRequest);
     this.employeeApi.apiEmployeePost({ employeeRequest: employeeRequest }).subscribe(result => {
       if (result) {
-        console.log("dodawanie emp:", result);
         const accountRequest = {
           username: this.accountEmployeeForm?.get('username')?.value,
           password: this.accountEmployeeForm?.get('password')?.value,
@@ -198,10 +191,8 @@ export class AccountFormComponent {
           positionID: form.positionID,
           teamID: form.teamID
         }
-        console.log('Account edit result:',result);
         this.employeeApi.apiEmployeeIdPut({ id: Number(this.employeeId), employeeRequest:employeeRequest  }).subscribe({
           next:(result)=>{
-
             this.router.navigateByUrl('/employee/'+this.employeeId);
             this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Employee edited successfully' });
           },
@@ -241,34 +232,27 @@ export class AccountFormComponent {
   }
 
   onUpload(event: FileUploadEvent) {
-    console.log("dodanie nowego");
-    console.log("id:", this.employeeId);
     for (let file of event.files) {
       if(this.employeeId)
       this.photoApi.apiPhotoUploadPhotoEmployeeIdPost({ photo: file, employeeId: Number(this.employeeId) }).subscribe({
         next: (result) => {
-          console.log("blob z azure: ", result);
           var newPhoto: PhotoRequest = {
             employeeID: Number(this.employeeId),
             filename: result.name,
             uri: result.uri
           };
-          console.log("nowe photo obiekt:", newPhoto);
           this.photoApi.apiPhotoPost({ photoRequest: newPhoto }).subscribe({
             next: (result) => {
-              console.log("dodane photo: ", result);
               this.router.navigateByUrl('/employee/'+this.employeeId);
               this.showSuccess();
               this.refreshService.refresh('logged-user');
             },
             error: (err) => { 
-              console.log("error dok:", err);
               this.showError();
              }
           })
         },
         error: (err) => { 
-          console.log("error azure:", err);
           this.showError();
          }
       }
@@ -277,8 +261,6 @@ export class AccountFormComponent {
   }
 
   editPhoto(event: FileUploadEvent){
-    console.log("edit zdj");
-    console.log("id zdjecia",this.employeeDetails?.photo);
     for (let file of event.files){
       if(this.employeeDetails?.photo?.fileID && this.employeeId){
     this.photoApi.apiPhotoIdEmployeeIdPut({id: this.employeeDetails?.photo?.fileID, photo: file, employeeId: Number(this.employeeId)}).subscribe({
@@ -288,42 +270,11 @@ export class AccountFormComponent {
         this.refreshService.refresh('logged-user');
       },
       error: (err)=>{
-        console.log("error w update zdjecia?: ", err);
+        console.log(err);
       }
     })
       }
     }
-  }
-  checkUsername() {
-    // this.apiService.request('checkUsername', 'get', undefined, this.typedUsername, undefined).subscribe(
-    //   (response: any) => {
-    //     this.usernameExists = response;
-    //     const usernameControl = this.userForm?.get('username');
-    //     if (this.usernameExists) {
-    //       usernameControl?.setErrors(null);
-    //     } else {
-    //       usernameControl?.setErrors({ usernameExists: true });
-    //     }
-    //   }
-    // );
-  }
-
-  uploadAvatar(event: any) {
-    // console.log('event: ', event);
-    // const fileUpload = event.target.files[0];
-    // console.log('File upload: ', fileUpload);
-
-    // if (fileUpload) {
-    //   this.employeeApi.apiEmployeeUploadPhotoPost(fileUpload).subscribe((result: any) => {
-    //     console.log('Uploaded file: ', result);
-    //     if (result) {
-    //       this.uploadedFileUrl = result.secureUrl;
-    //       this.accountEmployeeForm?.controls['avatar'].setValue(this.uploadedFileUrl);
-    //       this.employeeDetails.avatar = this.uploadedFileUrl;
-    //       this.selectedImage = this.uploadedFileUrl;
-    //     }
-    //   })
-    // }
   }
 
   showSuccess() {

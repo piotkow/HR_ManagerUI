@@ -56,7 +56,6 @@ export class PositionListComponent {
   deletePosition(positionId: number) {
     this.positionApi.apiPositionIdDelete({ id: positionId }).subscribe({
       next: (res) => {
-        console.log(" doc id: ", positionId);
         this.getPositions();
         this.messageService.add({ severity: 'info', summary: 'Confirmed', detail: 'Record deleted' });
       },

@@ -30,33 +30,27 @@ export class UploadComponent {
   ) { }
 
   onUpload(event: FileUploadEvent) {
-    console.log("id:", this.employeeID);
     for (let file of event.files) {
       if(this.employeeID)
       this.documentApi.apiDocumentUploadDocumentEmployeeIdPost({document: file, employeeId: Number(this.employeeID)}).subscribe({
         next: (result) => {
-          console.log("blob z azure: ", result);
           var newDocument: DocumentRequest = {
             employeeID: Number(this.employeeID),
             filename: result.name,
             issueDate: new Date().toISOString(),
             uri: result.uri
           };
-          console.log("nowy dok obiekt:", newDocument);
           this.documentApi.apiDocumentPost({ documentRequest: newDocument }).subscribe({
             next: (result) => {
-              console.log("dodany dok: ", result);
               this.refreshDataService.refresh('document-list');
               this.showSuccess();
             },
             error: (err) => { 
-              console.log("error dok:", err);
               this.showError();
              }
           })
         },
         error: (err) => { 
-          console.log("error azure:", err);
           this.showError();
          }
       }

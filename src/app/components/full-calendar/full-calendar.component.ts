@@ -19,7 +19,6 @@ import { RefreshDataService } from '../../services/refresh-data.service';
   styleUrl: './full-calendar.component.css'
 })
 export class FullCalendarComponent {
-  // @ViewChild('op') overlayPanel!: OverlayPanel;
   constructor(
     private absenceApi: AbsenceApi,
     private storageService: StorageService,
@@ -36,9 +35,7 @@ export class FullCalendarComponent {
 
   ngOnInit(){
     this.updateCalendar();
-    console.log("teamId", this.teamIdToShowOnDialog);
     this.user = this.storageService.get('user');
-    console.log("user",this.user);
     this.subscription.add(this.refreshDataService.refreshSubject.subscribe((index) => {
       if (index === 'init-calendar') {
         this.updateCalendar();
@@ -76,14 +73,12 @@ export class FullCalendarComponent {
         this.absenceApi.apiAbsenceByTeamTeamIdGet({ teamId: teamId }).subscribe({
             next: (result) => {
                 this.absences = result;
-                console.log("absences:", this.absences);
-                // Mapping result to events compatible with EVENT_REFINERS
                 let events = result.map(r => ({
-                    id: r.absenceId?.toString(), // mapowanie absenceId na id
-                    title: `${r.firstName} ${r.lastName}`, // mapowanie imienia i nazwiska na tytuł
-                    start: r.startDate, // mapowanie startDate na start
-                    end: r.endDate, // mapowanie endDate na end
-                    allDay: true, // zakładamy, że nie są to wydarzenia całodniowe
+                    id: r.absenceId?.toString(),
+                    title: `${r.firstName} ${r.lastName}`,
+                    start: r.startDate,
+                    end: r.endDate,
+                    allDay: true,
                     extendedProps: {
                         description: r.description,
                         status: r.status,
@@ -91,7 +86,6 @@ export class FullCalendarComponent {
                     },
                     backgroundColor: r.status == 'Pending' ? '#9ea0f6' : r.status == 'Approved' ? '#22c55e' : '#ff6259'
                 }));
-                console.log("events: ", events);
                 successCallback(events);
             },
             error: (err) => {

@@ -40,7 +40,6 @@ export class AddPositionDialogComponent {
       positionDescription: this.positionDescription
     }
     this.positionApi.apiPositionPost({ positionRequest: positionReq}).subscribe(result=>{
-      console.log('result dodania position', result);
       this.refreshDataService.refresh('position-list');
       this.messageService.add({ severity: 'success', summary: 'Confirmed', detail: 'Position added successfully' });
       this.positionName="";
